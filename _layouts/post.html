@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<div class="post" itemscope itemtype="http://schema.org/CreativeWork">
+    <h1 class="entry-title" itemprop="headline">{{ page.title }}</h1>
+    {{ content }}
+    <p class="entry-meta">
+      <span class="entry-time text-muted">This article was published on <time class="entry-time" itemprop="datePublished" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></span>
+    </p>
+    <hr>
+    <h3>Your Questions / Comments</h3>
+    <p class="after-post">If you found this article interesting, found errors, or just want to discuss about it, please <a href="{{site.baseurl}}/about/">get in touch</a>.</p>
+</div>
