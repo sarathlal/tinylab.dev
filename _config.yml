@@ -32,3 +32,15 @@ exclude:
   - Gemfile.lock
 
 permalink: :title/
+
+collections:
+  ai_news:
+    output: true
+    permalink: /news/ai/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: ai_news
+    values:
+      layout: post
