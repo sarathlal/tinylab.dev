@@ -1,0 +1,16 @@
+---
+layout: compress
+---
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+  <body class="minimal" itemscope itemtype="http://schema.org/WebPage">
+    <div class="theme-toggle-floating">
+      {% include theme-toggle.html %}
+    </div>
+    <main class="container">
+      {{ content }}
+    </main>
+    <script src="{{ site.url }}/assets/js/minimal-theme-switcher.js"></script>
+  </body>
+</html>

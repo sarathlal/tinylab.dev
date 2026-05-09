@@ -24,5 +24,37 @@ a.normal-text {
   text-decoration: none; /* Remove underline */
   color: inherit;        /* Inherit color from parent element */
 }
+
+/* Theme toggle */
+.theme-toggle {
+  background: transparent;
+  border: 0;
+  padding: 0.4rem;
+  margin: 0;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  cursor: pointer;
+  line-height: 0;
+}
+.theme-toggle:hover,
+.theme-toggle:focus {
+  background: transparent;
+  color: var(--pico-primary, currentColor);
+  outline: none;
+}
+.theme-toggle .theme-icon { display: none; }
+html[data-theme-scheme="light"] .theme-toggle .theme-icon-sun  { display: inline-block; }
+html[data-theme-scheme="dark"]  .theme-toggle .theme-icon-moon { display: inline-block; }
+html[data-theme-scheme="auto"]  .theme-toggle .theme-icon-auto { display: inline-block; }
+header nav h2 { margin: 0; }
+.theme-toggle-floating {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
 	</style>
 </head>

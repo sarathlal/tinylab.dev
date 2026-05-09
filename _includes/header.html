@@ -12,14 +12,7 @@
 <!--     <li><a href="{{ site.url }}/about/">About Me</a></li>
     <li><a href="{{ site.url }}/archive/">Archive</a></li> -->
     <li>
-      <details class="dropdown">
-        <summary role="button" class="secondary">Theme</summary>
-        <ul>
-          <li><a href="#" data-theme-switcher="auto">Auto</a></li>
-          <li><a href="#" data-theme-switcher="light">Light</a></li>
-          <li><a href="#" data-theme-switcher="dark">Dark</a></li>
-        </ul>
-      </details>
+      {% include theme-toggle.html %}
     </li>
   </ul>
 </nav>

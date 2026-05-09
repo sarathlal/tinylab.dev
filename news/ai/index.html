@@ -1,0 +1,40 @@
+---
+layout: page
+title: AI News
+permalink: /news/ai/
+description: "Daily updates on AI — model releases, policy, funding, and research."
+sitemap:
+  priority: 0.8
+  changefreq: 'daily'
+---
+
+<article class="archive" itemscope itemtype="http://schema.org/CreativeWork">
+
+  {% assign entries = site.ai_news | sort: 'date' | reverse %}
+  {% for entry in entries %}
+
+    {% capture this_year %}{{ entry.date | date: "%Y" }}{% endcapture %}
+    {% if forloop.first %}
+      <h3 class="archive-year">{{ this_year }}</h3>
+      <ul>
+    {% else %}
+      {% unless year == this_year %}
+        </ul>
+        <h3 class="archive-year">{{ this_year }}</h3>
+        <ul>
+      {% endunless %}
+    {% endif %}
+    {% assign year = this_year %}
+
+    <li class="archive-item">
+      <span class="archive-date text-muted">{{ entry.date | date: "%b %-d" }}</span>
+      <a href="{{ site.baseurl }}{{ entry.url }}" class="archive-title">{{ entry.title }}</a>
+    </li>
+
+    {% if forloop.last %}
+      </ul>
+    {% endif %}
+
+  {% endfor %}
+
+</article>
