@@ -9,3 +9,42 @@ layout: default
     </p>
     <hr>
 </div>
+<style>
+  .social-content { display: none; }
+  .social-content.is-visible { display: block; }
+  .social-content-toggle {
+    background: transparent;
+    border: 1px solid var(--pico-muted-border-color, currentColor);
+    color: inherit;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin: 0 0 1rem;
+    width: auto;
+  }
+  .social-content-toggle:hover,
+  .social-content-toggle:focus {
+    background: transparent;
+    color: var(--pico-primary, currentColor);
+    outline: none;
+  }
+</style>
+<script>
+  (function () {
+    document.querySelectorAll('.social-content').forEach(function (el) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'social-content-toggle';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Show social post';
+      btn.addEventListener('click', function () {
+        var visible = el.classList.toggle('is-visible');
+        btn.setAttribute('aria-expanded', visible ? 'true' : 'false');
+        btn.textContent = visible ? 'Hide social post' : 'Show social post';
+      });
+      el.parentNode.insertBefore(btn, el);
+    });
+  })();
+</script>
