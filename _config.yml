@@ -36,7 +36,7 @@ permalink: :title/
 collections:
   ai_news:
     output: true
-    permalink: /news/ai/:path/
+    permalink: /news/ai/:slug/
 
 defaults:
   - scope:
