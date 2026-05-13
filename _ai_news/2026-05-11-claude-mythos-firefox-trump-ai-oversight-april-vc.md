@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Claude Mythos Finds 271 Firefox Zero-Days, Trump Pivots to AI Pre-Deployment Testing, April VC Hits $56B — May 11, 2026"
+slug: claude-mythos-firefox-trump-ai-oversight-april-vc
 date: 2026-05-11 08:00:00 +0530
 categories: [ai, news, daily-brief]
 tags: [ai, llm, daily-brief]

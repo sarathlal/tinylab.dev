@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Google Launches Gemini Intelligence on Android, Anthropic Goes All-In on Legal, Connecticut Passes AI Law — May 13, 2026"
+slug: gemini-intelligence-android-anthropic-legal-connecticut-ai-law
 date: 2026-05-13 08:00:00 +0530
 categories: [ai, news, daily-brief]
 tags: [ai, llm, daily-brief]

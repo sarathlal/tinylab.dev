@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "OpenAI Launches $4B Deployment Company, Spy Agencies Push for AI Oversight, DeepMind Solves Open Math Problems — May 12, 2026"
+slug: openai-deployment-company-spy-agencies-deepmind-math
 date: 2026-05-12 08:00:00 +0530
 categories: [ai, news, daily-brief]
 tags: [ai, llm, daily-brief]

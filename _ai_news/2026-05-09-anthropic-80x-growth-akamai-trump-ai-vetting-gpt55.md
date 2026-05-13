@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Anthropic 80x Growth Fuels $1.8B Akamai Deal, Trump Weighs AI Pre-Release Vetting, GPT-5.5 Instant Default — May 9, 2026"
+slug: anthropic-80x-growth-akamai-trump-ai-vetting-gpt55
 date: 2026-05-09 07:00:00 +0530
 categories: [ai, news, daily-brief]
 tags: [ai, llm, daily-brief]
