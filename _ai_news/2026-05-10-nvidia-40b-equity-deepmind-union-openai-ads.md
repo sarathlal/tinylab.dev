@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Nvidia Tops $40B in AI Equity Bets, DeepMind Workers Vote 98% to Unionize, OpenAI Builds ChatGPT Ad Business — May 10, 2026"
+slug: nvidia-40b-equity-deepmind-union-openai-ads
 date: 2026-05-10 08:00:00 +0530
 categories: [ai, news, daily-brief]
 tags: [ai, llm, daily-brief]
