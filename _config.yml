@@ -24,6 +24,7 @@ url: "https://tinylab.dev" # the base hostname & protocol for your site, e.g. ht
 
 # Build settings
 markdown: kramdown
+future: true
 #theme: minima
 gems:
   - jekyll-feed
