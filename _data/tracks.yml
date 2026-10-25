@@ -1,0 +1,41 @@
+# Learning tracks shown on /learn/ and used by the tutorial layout.
+#
+# `key` must match the collection name in _config.yml (the `_<key>/` folder).
+# `status` is one of: active, planned. Planned tracks show on /learn/ without a link.
+# Order here is the display order.
+
+- key: devops
+  title: DevOps
+  tagline: Docker, Kubernetes, Linux, networking, CI/CD, IaC, cloud, observability and security — from fundamentals to expert, aimed at senior DevOps interviews.
+  status: active
+  icon: "🛠️"
+
+- key: linux
+  title: Linux deep dive
+  tagline: The kernel, processes, memory, storage and performance, explained from first principles.
+  status: planned
+  icon: "🐧"
+
+- key: python
+  title: Python
+  tagline: From first script to production tooling.
+  status: planned
+  icon: "🐍"
+
+- key: go
+  title: Go
+  tagline: A practical path through Go for infrastructure and backend work.
+  status: planned
+  icon: "🐹"
+
+- key: rust
+  title: Rust
+  tagline: Ownership, lifetimes and systems programming without the fear.
+  status: planned
+  icon: "🦀"
+
+- key: react
+  title: React
+  tagline: Modern front-end development, one concept at a time.
+  status: planned
+  icon: "⚛️"

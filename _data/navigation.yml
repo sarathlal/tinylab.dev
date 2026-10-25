@@ -1,0 +1,9 @@
+# Site header links, in order.
+- title: Learn
+  url: /learn/
+- title: AI News
+  url: /news/ai/
+- title: Archive
+  url: /archive/
+- title: About
+  url: /about/

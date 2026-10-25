@@ -1,47 +1,76 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: TinyLab
 email: hello@tinylab.dev
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://tinylab.dev" # the base hostname & protocol for your site, e.g. http://example.com
+description: >-
+  Plain-language tutorials for people building a career in tech: DevOps, Docker,
+  Kubernetes, Linux, Python, Go, Rust and React — plus a daily AI news brief.
+baseurl: ""
+url: "https://tinylab.dev"
+author: Sarathlal N
+github_username: sarathlal
+repository: sarathlal/tinylab.dev
+lang: en
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+  toc_levels: 2..3
 future: true
-#theme: minima
-gems:
+timezone: Asia/Kolkata
+
+plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
+  - CONTRIBUTING.md
+  - _templates
+  - vendor
+  - node_modules
 
 permalink: :title/
 
+# -----------------------------------------------------------------------------
+# Collections
+#
+# Every learning track is a collection. Files are ordered by the `order`
+# front-matter field (and grouped by `section`), never by date.
+# To add a new track: create `_<track>/`, add it here, and add it to
+# `_data/tracks.yml`. Nothing else needs to change.
+# -----------------------------------------------------------------------------
 collections:
   ai_news:
     output: true
     permalink: /news/ai/:slug/
+  devops:
+    output: true
+    permalink: /learn/devops/:path/
+  # python:
+  #   output: true
+  #   permalink: /learn/python/:path/
 
 defaults:
   - scope:
       path: ""
       type: ai_news
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: devops
+    values:
+      layout: tutorial
+      track: devops
+  - scope:
+      path: ""
+      type: posts
     values:
       layout: post

@@ -1,0 +1,26 @@
+---
+layout: null
+sitemap: false
+---
+{%- comment -%}
+  Search index for all learning-track pages. Add any new track collection
+  to the `tracks` list below (or keep it driven by _data/tracks.yml as here).
+{%- endcomment -%}
+[
+{%- assign first = true -%}
+{%- for track in site.data.tracks -%}
+  {%- assign docs = site[track.key] -%}
+  {%- for doc in docs -%}
+    {%- unless first -%},{%- endunless -%}{%- assign first = false -%}
+    {
+      "title": {{ doc.title | jsonify }},
+      "url": {{ doc.url | prepend: site.baseurl | jsonify }},
+      "track": {{ track.title | jsonify }},
+      "section": {{ doc.section | default: "" | jsonify }},
+      "level": {{ doc.level | default: "" | jsonify }},
+      "description": {{ doc.description | default: "" | jsonify }},
+      "content": {{ doc.content | markdownify | strip_html | strip_newlines | replace: "  ", " " | truncate: 4000 | jsonify }}
+    }
+  {%- endfor -%}
+{%- endfor -%}
+]

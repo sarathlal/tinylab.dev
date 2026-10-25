@@ -1,0 +1,23 @@
+{% comment %} Grid of learning tracks from _data/tracks.yml {% endcomment %}
+<div class="track-grid">
+  {% for track in site.data.tracks %}
+    {% assign index_page = site[track.key] | where_exp: "p", "p.section == nil or p.section == false" | first %}
+    {% assign page_count = site[track.key] | where_exp: "p", "p.section" | size %}
+    <article class="track-card{% if track.status != 'active' %} planned{% endif %}">
+      <h3>
+        {{ track.icon }}
+        {% if track.status == 'active' and index_page %}
+          <a href="{{ site.baseurl }}{{ index_page.url }}">{{ track.title }}</a>
+        {% else %}
+          {{ track.title }}
+        {% endif %}
+      </h3>
+      <p>{{ track.tagline }}</p>
+      {% if track.status == 'active' %}
+        <span class="badge">{{ page_count }} page{% if page_count != 1 %}s{% endif %}</span>
+      {% else %}
+        <span class="badge">Coming soon</span>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>
