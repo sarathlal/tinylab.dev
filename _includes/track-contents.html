@@ -1,0 +1,43 @@
+{% comment %}
+  Full table of contents for a track: every section in order, every page
+  under it in order, with level badge and description.
+  Usage: {% include track-contents.html track="devops" %}
+  (defaults to page.track)
+{% endcomment %}
+{% assign track_key = include.track | default: page.track %}
+{% assign track_pages = site[track_key] | where_exp: "p", "p.section" %}
+{% assign sections = track_pages | map: "section" | uniq %}
+
+{% assign ordered_sections = "" | split: "" %}
+{% for s in sections %}
+  {% assign first_in = track_pages | where: "section", s | sort: "section_order" | first %}
+  {% assign so = first_in.section_order | default: 999 | plus: 1000 %}
+  {% assign entry = so | append: "::" | append: s %}
+  {% assign ordered_sections = ordered_sections | push: entry %}
+{% endfor %}
+{% assign ordered_sections = ordered_sections | sort %}
+
+<div class="track-contents">
+  {% if ordered_sections.size == 0 %}
+    <p class="text-muted">No pages yet.</p>
+  {% endif %}
+  {% for entry in ordered_sections %}
+    {% assign parts = entry | split: "::" %}
+    {% assign s = parts[1] %}
+    {% assign pages_in = track_pages | where: "section", s | sort: "order" %}
+    <section class="track-section">
+      <h3 id="{{ s | slugify }}">{{ forloop.index }}. {{ s }}</h3>
+      <ol class="track-pages">
+        {% for p in pages_in %}
+          <li>
+            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+            {% if p.level %}<span class="badge badge-{{ p.level }}">{{ p.level }}</span>{% endif %}
+            {% if p.lab %}<span class="badge">Lab</span>{% endif %}
+            {% if p.reading_time %}<span class="text-muted page-time">{{ p.reading_time }} min</span>{% endif %}
+            {% if p.description %}<div class="page-desc text-muted">{{ p.description }}</div>{% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+  {% endfor %}
+</div>
