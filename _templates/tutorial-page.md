@@ -6,13 +6,13 @@ description: "One sentence shown under the title and in search results."
 section: "Docker"           # sidebar group; must match other pages in the section exactly
 section_order: 2            # position of the section within the track (same on every page of the section)
 order: 1                    # position of the page within the section
-level: foundation           # foundation | senior | expert
+level: foundation           # foundation | intermediate | advanced
 reading_time: 8             # minutes, optional
 lab: false                  # true marks the page as a hands-on lab
 date: 2026-10-26            # last updated
 ---
 
-Open with one or two sentences that say what this page answers and why it matters. No "In this article we will…".
+Open with one or two sentences that say what this page answers and why a reader would care. No "In this article we will…", and no exam or interview framing.
 
 ## The everyday picture
 
@@ -34,19 +34,27 @@ The same idea in technical terms. Short paragraphs. Name the real components. A 
 docker run --rm hello-world
 ```
 
-## In the interview
-
-> **In the interview**
-> **Question they ask:** "…"
-> **What they are really checking:** …
-> **A strong answer:** …
-{: .callout .callout-interview}
-
 ## Common mistakes
 
 > **Common mistake**
 > What people get wrong and how to spot the trap.
 {: .callout .callout-mistake}
+
+## Check your understanding
+
+Every answer below is in this page. Try to answer before you open it.
+
+<ul class="check-list">
+<li><details><summary>Question one?</summary>
+<p>The answer, in two or three sentences, pointing back to the section that explains it.</p>
+</details></li>
+<li><details><summary>Question two?</summary>
+<p>Answer.</p>
+</details></li>
+<li><details><summary>Question three?</summary>
+<p>Answer.</p>
+</details></li>
+</ul>
 
 ## Further reading
 

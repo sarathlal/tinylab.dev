@@ -4,12 +4,12 @@ description: "The chain from the docker CLI through dockerd, containerd, runc an
 section: "Docker"
 section_order: 2
 order: 4
-level: senior
+level: intermediate
 reading_time: 11
 date: 2026-10-26
 ---
 
-"Walk me through what happens when you run `docker run nginx`" is the container equivalent of "what happens when you type a URL into a browser". It is asked because the answer reveals whether you know the moving parts or just the CLI. There are five of them, and each exists for a reason.
+You type `docker run nginx` and a web server is running a second later. Between the Enter key and that server, five separate programs hand the work to each other, and each one exists for a reason. Knowing the chain explains a lot of otherwise puzzling behaviour: why containers survive a Docker restart, why Kubernetes dropped Docker, and why the Docker socket is such a sensitive file.
 
 ## The everyday picture
 
@@ -90,17 +90,6 @@ docker rm -f web
 
 If `ctr` is not on your path, it ships with Docker Engine on Linux; on Docker Desktop you would run these inside the Desktop VM.
 
-## In the interview
-
-> **In the interview**
-> **Question they ask:** "Walk me through what happens when I run `docker run nginx`."
->
-> **What they are really checking:** whether you know the components (CLI → dockerd → containerd → shim → runc → kernel), what each one is for, and where the kernel features from the first page fit.
->
-> **A strong answer** in under two minutes: "The CLI sends an API request over the Docker socket to dockerd. dockerd checks the local image store and, if needed, pulls the manifest and layers from the registry, verifying digests. It creates the writable layer, sets up the network namespace, veth pair and port-mapping iptables rules, builds an OCI bundle, and asks containerd over gRPC to run it. containerd spawns a shim per container and calls runc. runc makes the kernel calls — clone with new namespaces, cgroup limits, pivot_root into the overlay rootfs, drop capabilities, apply seccomp — then execs nginx and exits. From then on the container is a kernel-isolated process owned by the shim, which is why the daemon can restart without killing containers."
->
-> **Follow-ups to expect:** "Why did Kubernetes drop Docker?" (CRI; it only ever needed containerd.) "What's the security implication of the Docker socket?" (Root-equivalent.) "Where does the image end and the container begin?" (The writable layer.)
-{: .callout .callout-interview}
 
 ## Common mistakes
 
@@ -111,6 +100,28 @@ If `ctr` is not on your path, it ships with Docker Engine on Linux; on Docker De
 > **Common mistake**
 > Mounting `/var/run/docker.sock` into a CI container for convenience. It hands root on the host to every job that runs there. Use rootless builders (BuildKit, Kaniko) or a dedicated build VM.
 {: .callout .callout-mistake}
+
+## Check your understanding
+
+Every answer below is in this page. Try to answer before you open it.
+
+<ul class="check-list">
+<li><details><summary>Name the five components in order, and give each one a one-line job.</summary>
+<p><strong>docker CLI</strong> — turns your command into an API request. <strong>dockerd</strong> — pulls images, sets up the network, volumes and writable layer, builds the OCI bundle. <strong>containerd</strong> — supervises containers, starts a shim per container. <strong>runc</strong> — makes the kernel calls to create the isolated process, then exits. <strong>Linux kernel</strong> — provides namespaces, cgroups, capabilities and seccomp.</p>
+</details></li>
+<li><details><summary>Which program is the parent of the running nginx process?</summary>
+<p>The containerd shim — not dockerd and not runc. runc exits as soon as the process is started. This is why <code>live-restore</code> lets you restart or upgrade the daemon without stopping containers.</p>
+</details></li>
+<li><details><summary>Why is giving someone access to <code>/var/run/docker.sock</code> the same as giving them root?</summary>
+<p>Anyone who can write to that socket can ask the daemon to run any container, including one with the host filesystem mounted and privileges enabled. The daemon runs as root and will do it.</p>
+</details></li>
+<li><details><summary>What is an OCI bundle?</summary>
+<p>A directory with a <code>rootfs</code> (the mounted image layers) and a <code>config.json</code> describing namespaces, cgroups, mounts, capabilities, environment and the command. It is the standard input to any OCI runtime, which is why runc can be swapped for crun, gVisor or Kata.</p>
+</details></li>
+<li><details><summary>Why did Kubernetes stop supporting Docker Engine, and did that break Docker images?</summary>
+<p>The kubelet only needs the Container Runtime Interface, which containerd and CRI-O implement directly; supporting Docker meant maintaining an extra adapter (dockershim). Images did not change at all — they follow the OCI image spec, which every runtime reads.</p>
+</details></li>
+</ul>
 
 ## Further reading
 

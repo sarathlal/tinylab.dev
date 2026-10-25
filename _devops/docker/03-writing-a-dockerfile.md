@@ -4,12 +4,12 @@ description: "Multi-stage builds, cache-friendly ordering, non-root users, ENTRY
 section: "Docker"
 section_order: 2
 order: 3
-level: senior
+level: intermediate
 reading_time: 12
 date: 2026-10-26
 ---
 
-A Dockerfile that works is easy. A Dockerfile that builds fast, stays small, runs safely and behaves predictably when stopped takes a few deliberate choices. This page walks through those choices on one real example, then gives you the checklist reviewers use.
+A Dockerfile that works is easy. A Dockerfile that builds fast, stays small, runs safely and behaves predictably when stopped takes a few deliberate choices. This page walks through those choices on one real example, then gives you a checklist to run your own Dockerfiles against.
 
 ## The everyday picture
 
@@ -130,17 +130,6 @@ node_modules
 .env
 ```
 
-## In the interview
-
-> **In the interview**
-> **Question they ask:** "Review this Dockerfile. What would you change?" (They hand you something like the naive version.)
->
-> **What they are really checking:** whether you can spot the four or five standard problems quickly and explain the consequence of each, not just recite "use alpine".
->
-> **A strong answer** walks the file top to bottom: "Full `node:22` is 1 GB; use `-slim` or a multi-stage build. `COPY . .` before install means every code change reinstalls dependencies and probably copies `.git` and `node_modules` in — copy the lockfile first and add a `.dockerignore`. `npm install` isn't reproducible; `npm ci` is. It runs as root. `CMD npm start` is shell form, so `npm` is PID 1 wrapped in `sh` and the app won't get `SIGTERM`; use exec-form `ENTRYPOINT` pointing at `node` directly. There's no `HEALTHCHECK`, so the orchestrator can't distinguish alive from healthy. And I'd pin the base image by digest in CI."
->
-> **Follow-ups to expect:** "What does a multi-stage build actually copy?" "How do you get a secret into the build without leaking it?" "Why is `chown -R` in a `RUN` expensive?"
-{: .callout .callout-interview}
 
 ## Common mistakes
 
@@ -152,7 +141,7 @@ node_modules
 > `VOLUME` in the Dockerfile. It silently creates an anonymous volume on every run, surprises everyone, and cannot be undone by later instructions. Declare volumes at run time or in Compose, where they are visible.
 {: .callout .callout-mistake}
 
-## Reviewer's checklist
+## Checklist for your own Dockerfiles
 
 - [ ] Pinned base image (`node:22.9-bookworm-slim`, or a digest in CI)
 - [ ] Multi-stage build; no compilers or dev dependencies in the final stage
@@ -164,6 +153,31 @@ node_modules
 - [ ] `HEALTHCHECK` defined
 - [ ] No secrets via `ARG`, `ENV` or `COPY`
 - [ ] `EXPOSE` documents the port; labels (`org.opencontainers.image.*`) document the source
+
+## Check your understanding
+
+Every answer below is in this page. Try to answer before you open it.
+
+<ul class="check-list">
+<li><details><summary>What does a multi-stage build achieve, in one sentence?</summary>
+<p>It does the building (compilers, dev dependencies, caches) in one stage and copies only the finished result into a clean final stage, so none of the build-time tooling ends up in the image you ship.</p>
+</details></li>
+<li><details><summary>Why does <code>CMD npm start</code> make <code>docker stop</code> take ten seconds?</summary>
+<p>It is shell form, so PID 1 is <code>/bin/sh -c</code>, and <code>sh</code> does not forward <code>SIGTERM</code> to the child. The app never hears the stop request, so Docker waits for the grace period and then sends <code>SIGKILL</code>. Use exec form (<code>["node", "src/server.js"]</code>) so the real process is PID 1.</p>
+</details></li>
+<li><details><summary>What is the difference between <code>ENTRYPOINT</code> and <code>CMD</code>?</summary>
+<p><code>ENTRYPOINT</code> is the executable; <code>CMD</code> is its default arguments. Extra arguments on <code>docker run</code> replace <code>CMD</code> and are appended to <code>ENTRYPOINT</code>.</p>
+</details></li>
+<li><details><summary>Why is it unsafe to pass a secret with <code>ARG</code> or <code>ENV</code>?</summary>
+<p><code>ENV</code> values persist in the image config and show in <code>docker inspect</code>; <code>ARG</code> values appear in layer metadata and <code>docker history</code>. Use <code>RUN --mount=type=secret</code> so the secret exists only during that one instruction and never lands in a layer.</p>
+</details></li>
+<li><details><summary>Why do <code>apt-get update</code> and <code>apt-get install</code> belong in the same <code>RUN</code>?</summary>
+<p>If they are separate, the <code>update</code> layer gets cached. Weeks later the <code>install</code> step runs against a stale package list and fails or installs old versions.</p>
+</details></li>
+<li><details><summary>Why use <code>COPY --chown</code> instead of a later <code>RUN chown -R</code>?</summary>
+<p>A <code>RUN chown -R</code> changes every file's metadata, which copies every file into a new layer — doubling that part of the image. <code>--chown</code> sets ownership as the files are written.</p>
+</details></li>
+</ul>
 
 ## Further reading
 

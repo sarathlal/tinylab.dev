@@ -9,7 +9,7 @@ reading_time: 9
 date: 2026-10-26
 ---
 
-Everyone says "containers are lightweight virtual machines". They are not, and the difference is the first thing a senior interviewer will probe. A container is an ordinary process — the same kind of process as your text editor — that the Linux kernel has walled off so it cannot see the rest of the machine.
+Everyone says "containers are lightweight virtual machines". They are not, and the difference matters as soon as you try to understand why containers start instantly, why they can't run Windows on Linux, or what a container can and cannot see. A container is an ordinary process — the same kind of process as your text editor — that the Linux kernel has walled off so it cannot see the rest of the machine.
 
 ## The everyday picture
 
@@ -69,27 +69,38 @@ docker rm -f demo
 
 The numbers in square brackets are namespace IDs. Where they differ, the container has its own; where they match, it shares yours.
 
-## In the interview
-
-> **In the interview**
-> **Question they ask:** "How is a container different from a virtual machine?"
->
-> **What they are really checking:** whether you know that a container shares the host kernel, and whether you can name the kernel features that make isolation possible.
->
-> **A strong answer:** "A VM virtualises hardware and runs its own kernel on a hypervisor; a container is a host process isolated by kernel namespaces and limited by cgroups, sharing the host kernel. That makes containers faster to start and denser to pack, but the isolation boundary is the kernel, so a kernel vulnerability affects every container on the host. That is why for untrusted multi-tenant workloads you reach for a VM, a sandboxed runtime like gVisor or Kata, or at least rootless containers with a tight seccomp profile."
->
-> **Follow-ups to expect:** "Can a container run Windows on Linux?" (No — same kernel.) "What is the security boundary?" (The kernel.) "Why do containers on a Mac feel slower?" (They are running in a Linux VM.)
-{: .callout .callout-interview}
 
 ## Common mistakes
 
 > **Common mistake**
-> Saying "the container has its own OS". It has its own *filesystem image* containing an OS's files, but it runs on the host's kernel. If you say "Ubuntu kernel" in an interview, the follow-up will be uncomfortable.
+> Saying "the container has its own OS". It has its own *filesystem image* containing an OS's files, but it runs on the host's kernel. There is no "Ubuntu kernel" inside the container.
 {: .callout .callout-mistake}
 
 > **Common mistake**
 > Assuming root inside a container equals root on the host. By default it is close — which is exactly why running as a non-root user and dropping capabilities matters, and why rootless Docker exists. Later pages cover both.
 {: .callout .callout-mistake}
+
+## Check your understanding
+
+Every answer below is in this page. Try to answer before you open it.
+
+<ul class="check-list">
+<li><details><summary>Does a container have its own operating system?</summary>
+<p>No. It has its own <em>filesystem image</em> containing an operating system's files, but it runs on the host's kernel. An "Ubuntu container" on a Fedora laptop uses the Fedora kernel; only the files are Ubuntu's.</p>
+</details></li>
+<li><details><summary>Which two kernel features do most of the isolation work, and what does each do?</summary>
+<p><strong>Namespaces</strong> give the process its own view of process IDs, network interfaces, mount points, hostname, users and IPC — the locked office. <strong>cgroups</strong> limit and account for CPU, memory, disk I/O and process count — the electricity meter.</p>
+</details></li>
+<li><details><summary>Why does the same process show as PID 48213 on the host but PID 1 inside the container?</summary>
+<p>Because of the PID namespace. The process is one real process; the namespace gives it a private numbering where it is the first process. The host sees the real number.</p>
+</details></li>
+<li><details><summary>Why do containers start in milliseconds while a virtual machine takes seconds or minutes?</summary>
+<p>Starting a container is just starting a process with some restrictions. A virtual machine has to boot an entire guest kernel on top of a hypervisor.</p>
+</details></li>
+<li><details><summary>Why do Linux containers on a Mac or Windows laptop feel different?</summary>
+<p>They run inside a hidden Linux virtual machine, because the host kernel is not Linux. Docker Desktop manages that VM for you.</p>
+</details></li>
+</ul>
 
 ## Further reading
 

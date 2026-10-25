@@ -74,17 +74,6 @@ docker manifest inspect alpine:3.20 | head -40
 docker image inspect alpine:3.20 --format '{% raw %}{{json .RootFS.Layers}}{% endraw %}'
 ```
 
-## In the interview
-
-> **In the interview**
-> **Question they ask:** "My image is 1.2 GB. How would you get it under 100 MB?"
->
-> **What they are really checking:** whether you understand layers well enough to diagnose, not just whether you know the word "alpine".
->
-> **A strong answer:** "First I'd run `docker history` to see which layers are big. Usually it's one of four things: build tools or package caches left in the final image — fix with a multi-stage build and `--no-install-recommends` / cleaning the cache in the same `RUN`; the whole repository copied in, including `.git` and `node_modules` — fix with `.dockerignore`; a heavy base image where `-slim` or distroless would do; or dependencies installed after copying source, so every code change re-downloads them and bloats the cache. I'd also pin the base image by digest so the size stays predictable."
->
-> **Follow-ups to expect:** "Why doesn't `rm` in a later step help?" (Whiteouts; lower layers are immutable.) "Alpine vs distroless?" (Alpine uses musl, which can bite some binaries; distroless has no shell, which is good for security and bad for debugging — use `docker debug` or an ephemeral container.)
-{: .callout .callout-interview}
 
 ## Common mistakes
 
@@ -95,6 +84,28 @@ docker image inspect alpine:3.20 --format '{% raw %}{{json .RootFS.Layers}}{% en
 > **Common mistake**
 > Using `latest`. It is a tag, not a version. Two builds a week apart can produce different images with the same name, and a rollback to "latest" rolls back to nothing. Pin a version tag for humans and a digest for machines.
 {: .callout .callout-mistake}
+
+## Check your understanding
+
+Every answer below is in this page. Try to answer before you open it.
+
+<ul class="check-list">
+<li><details><summary>What is an image made of?</summary>
+<p>A list of read-only <strong>layers</strong> — each a tarball of the files one Dockerfile instruction added or changed — plus a small <strong>manifest</strong> pointing at a <strong>config</strong> JSON with the environment, default command, working directory and user.</p>
+</details></li>
+<li><details><summary>You create a 100 MB file in one <code>RUN</code> and delete it in the next. How big is the image, and why?</summary>
+<p>Still about 100 MB larger. Layers are immutable; the delete only adds a "whiteout" marker in a later layer. The file is hidden, not removed. Create and delete in the same <code>RUN</code>, or use a multi-stage build.</p>
+</details></li>
+<li><details><summary>Why should <code>COPY package.json</code> come before <code>COPY . .</code>?</summary>
+<p>The build cache works top-down: a layer is reused only if its instruction and every layer above it are unchanged. Copying the dependency manifest first means the expensive install layer is reused until the manifest changes, instead of on every source edit.</p>
+</details></li>
+<li><details><summary>What is the difference between <code>nginx:1.27</code> and <code>nginx@sha256:…</code>?</summary>
+<p>The tag is a mutable name that can point at different images over time. The digest is the immutable content hash of one specific manifest. That is why production deployments pin digests.</p>
+</details></li>
+<li><details><summary>Your image is 1.2 GB. What are the four usual causes, in the order you would check them?</summary>
+<p>Run <code>docker history</code> first. Then: build tools or package caches left in the final image (multi-stage build, clean in the same <code>RUN</code>); the whole repository copied in including <code>.git</code> and <code>node_modules</code> (<code>.dockerignore</code>); a heavier base image than needed (<code>-slim</code> or distroless); dependencies installed after the source was copied (reorder).</p>
+</details></li>
+</ul>
 
 ## Further reading
 

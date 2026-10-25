@@ -6,7 +6,7 @@
 
 - key: devops
   title: DevOps
-  tagline: Docker, Kubernetes, Linux, networking, CI/CD, IaC, cloud, observability and security — from fundamentals to expert, aimed at senior DevOps interviews.
+  tagline: Docker, Kubernetes, Linux, networking, CI/CD, IaC, cloud, observability and security — from first container to running a platform, one hands-on page at a time.
   status: active
   icon: "🛠️"
 

@@ -26,7 +26,7 @@ search.json/search.md client-side search over all tracks
    - `section` — sidebar group. Must match other pages in the section exactly.
    - `section_order` — position of the section in the track. Same value on every page of the section.
    - `order` — position of the page inside its section.
-3. Keep the five-part shape: everyday picture → what it actually is → try it → in the interview → common mistakes.
+3. Keep the five-part shape: everyday picture → what it actually is → try it → common mistakes → check your understanding.
 4. Callouts are blockquotes with a kramdown class:
 
    ```markdown
@@ -35,7 +35,7 @@ search.json/search.md client-side search over all tracks
    {: .callout .callout-try}
    ```
 
-   Types: `callout-analogy`, `callout-try`, `callout-interview`, `callout-mistake`, `callout-note`.
+   Types: `callout-analogy`, `callout-try`, `callout-check`, `callout-mistake`, `callout-note`.
 5. If a code block contains `{{` (Go templates, Helm), wrap it in `{% raw %} … {% endraw %}` or Liquid will try to render it.
 
 The file name prefix (`01-`) only keeps files sorted in your editor; the site orders by front matter.
@@ -61,8 +61,10 @@ The file name prefix (`01-`) only keeps files sorted in your editor; the site or
 ## Levels
 
 - `foundation` — assumes nothing beyond basic terminal use.
-- `senior` — assumes the foundation pages; the depth a senior interview expects.
-- `expert` — internals, design and scale; the "one level deeper than the question" material.
+- `intermediate` — assumes the foundation pages; what you need to use the tool well at work.
+- `advanced` — internals, design and scale; for when you want to know *why*, not just *how*.
+
+The site is a learning kit, not exam or interview material. Never frame a page around "what they ask you"; explain the thing, let the reader try it, then ask questions whose answers are in the page.
 
 ## Running locally
 
