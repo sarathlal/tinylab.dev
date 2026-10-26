@@ -1,34 +1,38 @@
 # tinylab.dev — guide for writing tutorial pages
 
-This repository is a Jekyll site with long-form learning tracks. Read this file before
+This repository is a Jekyll site with long-form learning subjects. Read this file before
 writing or editing any tutorial page. `CONTRIBUTING.md` covers the site mechanics; this
-file covers *what a page must be*.
+file covers *what a page must be*; `docs/page-checklist.md` is the definition of done.
+
+**To write a page, use `/write-page <path>`. To check one, use `/review-page <path>`.**
+These commands (in `.claude/commands/`) walk through research, running every command,
+writing, verification and the checklist. Writing a page without them is not acceptable.
 
 ## What the site is
 
 A hands-on learning kit for ordinary people — not exam prep, not interview prep, not a
-reference manual. Every page teaches one topic thoroughly enough that a reader who does
-the exercises could use it at work the next day and explain it to a colleague.
+reference manual. The goal for every subject is **zero to expert**: a reader who works
+through all of its pages knows everything a working engineer knows about that subject.
+Each page is one topic within that, covered completely.
 
 ## The writing standard
 
 ### 1. Depth: the complete picture of one topic
 
 Each page covers its topic **completely** — everything a working engineer needs to know
-about it, including the parts that are usually left out because they are hard. Aim for
-2,500–5,000 words plus code. If a topic cannot be covered properly in that space, split it
-into two pages in the curriculum rather than writing a shallow one.
+about it, including the parts most tutorials leave out because they are hard. Minimum
+2,500 words excluding code; typically 3,000–5,000. There is no upper limit for a topic
+that needs it, but if it would pass ~6,000 words, propose splitting it into two pages in
+the curriculum rather than writing a shallow one. Length is a floor, not the goal: the
+test is section A of `docs/page-checklist.md`, which lists what "complete" means —
+problem, mechanism, every option, configuration, failure modes, limits, alternatives,
+security, vocabulary, version changes, an expert-level section.
 
-"Complete" means the page answers, for its topic:
-- What it is and what problem it solves
-- How it works underneath — the real mechanism, named components, what talks to what
-- How to use it day to day — the commands, files and options people actually use
-- How it fails — the common errors, what they look like, and how to diagnose each
-- The trade-offs and alternatives, and when *not* to use it
-- The vocabulary a reader will meet in documentation and at work
-- Where to read more — official documentation, specifications, the best deep-dive sources
+A useful test: open the official documentation's table of contents for the topic. Anything
+there that the page does not at least mention is a gap.
 
-The `covers:` list in a stub's front matter is the minimum; expand on it.
+The `covers:` list in a stub's front matter is the minimum; the finished page goes well
+beyond it.
 
 ### 2. Accuracy: never state something you have not verified
 
@@ -112,6 +116,8 @@ Remove `draft: true`, `sitemap: false` and `covers:` when the page is written.
 
 ## Workflow for writing a page
 
+`/write-page <path>` does all of this; the steps are listed so the standard is visible.
+
 1. Find the page's stub under `_<subject>/<section>/NN-slug.md`. Every planned page already
    exists as a stub; nothing needs generating.
 2. Open the stub. Its `covers:` list is the brief. Read the previous and next pages in
@@ -126,7 +132,9 @@ Remove `draft: true`, `sitemap: false` and `covers:` when the page is written.
    renders: callouts, code blocks, the check-list, prev/next links.
 9. Commit with a message like `devops/docker: write "Volumes — where your data lives"`.
 
-Write one page per commit. Do not write several pages at once — depth suffers.
+Write one page per commit. Do not write several pages at once — depth suffers. After
+writing, run `/review-page` on it in a fresh session before considering it done: a
+reviewer that did not write the page finds what the writer cannot.
 
 ## Liquid gotchas
 

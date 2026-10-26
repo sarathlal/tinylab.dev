@@ -28,7 +28,7 @@ planned page already exists as a stub file with `draft: true`; the site shows it
 "coming soon" with its outline. To write a page, replace the stub's body and remove
 `draft: true`, `sitemap: false` and `covers:`. `_data/curriculum/<subject>.yml` is the
 readable outline of each subject; keep it in step when you add or move pages.
-See `CLAUDE.md` for the writing standard every page must meet.
+See `CLAUDE.md` for the writing standard, `docs/page-checklist.md` for the definition of done, and the `/write-page` and `/review-page` commands in `.claude/commands/` for the workflow.
 
 ## Adding a page to an existing track
 
