@@ -1,8 +1,8 @@
 ---
-title: "What happens when you type docker run"
-description: "The chain from the docker CLI through dockerd, containerd, runc and the kernel — the single most asked 'explain it step by step' question for container roles."
-section: "Docker"
-section_order: 2
+title: What happens when you type docker run
+description: The chain from the docker CLI through dockerd, containerd, runc and the kernel — the single most asked 'explain it step by step' question for container roles.
+section: Docker
+section_order: 4
 order: 4
 level: intermediate
 reading_time: 11

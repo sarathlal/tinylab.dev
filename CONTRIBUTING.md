@@ -19,9 +19,21 @@ assets/css/syntax.css code highlighting for light and dark themes
 search.json/search.md client-side search over all tracks
 ```
 
+## The curriculum is the source of truth
+
+Each track's structure lives in `_data/curriculum/<track>.yml`: sections, pages, levels and
+a `covers:` outline per page. `python3 scripts/scaffold.py <track>` generates a stub for every
+page that does not exist yet (`draft: true`, shown on the site as "coming soon" with its
+outline) and keeps navigation fields in sync. It never overwrites a written page.
+
+To add a page or section, edit the curriculum file and run the script. To write a page,
+replace the stub's body and remove `draft: true` / `sitemap: false` / `covers:`.
+See `CLAUDE.md` for the writing standard every page must meet.
+
 ## Adding a page to an existing track
 
-1. Copy `_templates/tutorial-page.md` to `_<track>/<section-folder>/NN-slug.md`.
+1. Add it to `_data/curriculum/<track>.yml` and run `python3 scripts/scaffold.py <track>`
+   (or copy `_templates/tutorial-page.md` by hand for a track without a curriculum file).
 2. Fill in the front matter. The three fields that control navigation:
    - `section` — sidebar group. Must match other pages in the section exactly.
    - `section_order` — position of the section in the track. Same value on every page of the section.
@@ -42,7 +54,7 @@ The file name prefix (`01-`) only keeps files sorted in your editor; the site or
 
 ## Adding a new track (Python, Go, Rust, React, Linux …)
 
-1. Create the folder `_<track>/` with an `index.md` (no `section` field; set `permalink: /learn/<track>/`).
+1. Create `_data/curriculum/<track>.yml` (copy the DevOps one as a model) and the folder `_<track>/` with an `index.md` (no `section` field; set `permalink: /learn/<track>/`; include `{% raw %}{% include track-contents.html track="<track>" %}{% endraw %}`).
 2. In `_config.yml`, add the collection and a default:
 
    ```yaml
@@ -56,7 +68,7 @@ The file name prefix (`01-`) only keeps files sorted in your editor; the site or
    ```
 
 3. In `_data/tracks.yml`, set the track's `status` to `active` (or add it).
-4. Add pages as above. The sidebar, prev/next, learn hub and search pick it up automatically.
+4. Run `python3 scripts/scaffold.py <track>`. The sidebar, contents, prev/next, learn hub and search pick it up automatically.
 
 ## Levels
 

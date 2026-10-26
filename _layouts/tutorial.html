@@ -29,7 +29,9 @@ layout: default
       {% endif %}
     </div>
 
-    {% if page.description %}<p class="text-muted"><em>{{ page.description }}</em></p>{% endif %}
+    {% if page.draft %}
+    <div class="callout callout-note"><span class="callout-title">Coming soon</span><p>This page is planned but not written yet. The outline below is what it will cover.</p></div>
+    {% elsif page.description and page.description != "" %}<p class="text-muted"><em>{{ page.description }}</em></p>{% endif %}
 
     {% unless page.toc == false %}{% include toc.html %}{% endunless %}
 

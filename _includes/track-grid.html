@@ -2,7 +2,8 @@
 <div class="track-grid">
   {% for track in site.data.tracks %}
     {% assign index_page = site[track.key] | where_exp: "p", "p.section == nil or p.section == false" | first %}
-    {% assign page_count = site[track.key] | where_exp: "p", "p.section" | size %}
+    {% assign page_count = site[track.key] | where_exp: "p", "p.section" | where_exp: "p", "p.draft != true" | size %}
+    {% assign planned_count = site[track.key] | where_exp: "p", "p.section" | size %}
     <article class="track-card{% if track.status != 'active' %} planned{% endif %}">
       <h3>
         {{ track.icon }}
@@ -14,7 +15,7 @@
       </h3>
       <p>{{ track.tagline }}</p>
       {% if track.status == 'active' %}
-        <span class="badge">{{ page_count }} page{% if page_count != 1 %}s{% endif %}</span>
+        <span class="badge">{{ page_count }} of {{ planned_count }} pages</span>
       {% else %}
         <span class="badge">Coming soon</span>
       {% endif %}

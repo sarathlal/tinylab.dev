@@ -1,8 +1,8 @@
 ---
-title: "Images, layers and why your image is 1.2 GB"
-description: "An image is a stack of read-only layers plus a bit of metadata. Understanding the stack explains caching, image size, and half of all Dockerfile mistakes."
-section: "Docker"
-section_order: 2
+title: Images, layers and why your image is 1.2 GB
+description: An image is a stack of read-only layers plus a bit of metadata. Understanding the stack explains caching, image size, and half of all Dockerfile mistakes.
+section: Docker
+section_order: 4
 order: 2
 level: foundation
 reading_time: 10

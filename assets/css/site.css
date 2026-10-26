@@ -134,3 +134,9 @@ blockquote.callout > p:first-child > strong:first-child { display: block; margin
 .check-list summary::before { counter-increment: q; content: counter(q) ". "; color: var(--pico-muted-color); }
 .check-list details > :not(summary) { margin-top: 0.6rem; }
 .check-list details > :last-child { margin-bottom: 0; }
+
+/* Drafts ------------------------------------------------------------------- */
+.badge-draft { border-style: dashed; }
+.draft-title, .draft-link { color: var(--pico-muted-color); }
+.tutorial-sidebar .draft-link { display: block; padding: 0.25rem 0.5rem; }
+.track-progress { font-size: 0.9rem; }

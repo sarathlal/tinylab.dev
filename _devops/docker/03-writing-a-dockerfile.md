@@ -1,8 +1,8 @@
 ---
-title: "Writing a Dockerfile you'd be happy to show a reviewer"
-description: "Multi-stage builds, cache-friendly ordering, non-root users, ENTRYPOINT vs CMD, and the handful of rules that turn a working Dockerfile into a production one."
-section: "Docker"
-section_order: 2
+title: Writing a Dockerfile you'd be happy to show a reviewer
+description: Multi-stage builds, cache-friendly ordering, non-root users, ENTRYPOINT vs CMD, and the handful of rules that turn a working Dockerfile into a production one.
+section: Docker
+section_order: 4
 order: 3
 level: intermediate
 reading_time: 12

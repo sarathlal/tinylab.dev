@@ -17,7 +17,9 @@
 {% endfor %}
 {% assign ordered_sections = ordered_sections | sort %}
 
+{% assign written = track_pages | where_exp: "p", "p.draft != true" | size %}
 <div class="track-contents">
+  <p class="text-muted track-progress">{{ written }} of {{ track_pages.size }} pages written. Pages marked <span class="badge badge-draft">coming soon</span> show their planned outline.</p>
   {% if ordered_sections.size == 0 %}
     <p class="text-muted">No pages yet.</p>
   {% endif %}
@@ -30,11 +32,11 @@
       <ol class="track-pages">
         {% for p in pages_in %}
           <li>
-            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+            {% if p.draft %}<span class="draft-title">{{ p.title }}</span> <span class="badge badge-draft">coming soon</span>{% else %}<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>{% endif %}
             {% if p.level %}<span class="badge badge-{{ p.level }}">{{ p.level }}</span>{% endif %}
             {% if p.lab %}<span class="badge">Lab</span>{% endif %}
             {% if p.reading_time %}<span class="text-muted page-time">{{ p.reading_time }} min</span>{% endif %}
-            {% if p.description %}<div class="page-desc text-muted">{{ p.description }}</div>{% endif %}
+            {% if p.description and p.description != "" %}<div class="page-desc text-muted">{{ p.description }}</div>{% elsif p.covers %}<div class="page-desc text-muted">{{ p.covers | join: " · " }}</div>{% endif %}
           </li>
         {% endfor %}
       </ol>

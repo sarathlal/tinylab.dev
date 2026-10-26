@@ -1,0 +1,25 @@
+---
+title: Registries — storing and sharing images
+description: ''
+section: Docker
+section_order: 4
+order: 14
+level: intermediate
+draft: true
+sitemap: false
+date: '2026-10-27'
+covers:
+- Docker Hub, GHCR, ECR, GCR, Harbor
+- Tags, digests, immutability and promotion
+- Rate limits, pull-through caches, garbage collection
+---
+
+This page has not been written yet. Here is what it will cover when it is:
+
+- Docker Hub, GHCR, ECR, GCR, Harbor
+- Tags, digests, immutability and promotion
+- Rate limits, pull-through caches, garbage collection
+
+> **Note**
+> Want this page sooner? Open an issue or a pull request on [GitHub](https://github.com/sarathlal/tinylab.dev) — the outline above is the brief.
+{: .callout .callout-note}

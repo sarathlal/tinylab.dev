@@ -11,6 +11,7 @@ sitemap: false
 {%- for track in site.data.tracks -%}
   {%- assign docs = site[track.key] -%}
   {%- for doc in docs -%}
+    {%- if doc.draft -%}{%- continue -%}{%- endif -%}
     {%- unless first -%},{%- endunless -%}{%- assign first = false -%}
     {
       "title": {{ doc.title | jsonify }},

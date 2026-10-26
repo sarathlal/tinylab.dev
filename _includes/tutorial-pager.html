@@ -3,7 +3,7 @@
   (section_order, then order). Pages without a `section` (the track index)
   are excluded.
 {% endcomment %}
-{% assign track_pages = site[page.track] | where_exp: "p", "p.section" %}
+{% assign track_pages = site[page.track] | where_exp: "p", "p.section" | where_exp: "p", "p.draft != true" %}
 {% assign keyed = "" | split: "" %}
 {% for p in track_pages %}
   {% assign so = p.section_order | default: 999 | plus: 1000 %}

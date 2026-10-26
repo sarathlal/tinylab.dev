@@ -1,8 +1,8 @@
 ---
-title: "What is a container?"
-description: "A container is just a normal Linux process that has been told a convincing lie about the machine it is running on. Here is the lie, who tells it, and why it matters."
-section: "Docker"
-section_order: 2
+title: What is a container?
+description: A container is just a normal Linux process that has been told a convincing lie about the machine it is running on. Here is the lie, who tells it, and why it matters.
+section: Docker
+section_order: 4
 order: 1
 level: foundation
 reading_time: 9
