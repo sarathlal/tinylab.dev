@@ -1,0 +1,91 @@
+# Networking curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py networking` turns it into stub pages under _networking/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: networking
+title: Networking
+sections:
+- name: Foundations
+  folder: foundations
+  pages:
+  - slug: how-the-internet-works
+    title: How a request gets from your browser to a server
+    level: foundation
+    covers:
+    - The layered model from cable to application, with one request traced end to end
+    - Where DNS, TCP, TLS and HTTP each fit
+  - slug: ip-addresses-and-subnets
+    title: IP addresses, subnets and CIDR
+    level: foundation
+    covers:
+    - IPv4 structure, private ranges, CIDR notation and subnet arithmetic
+    - IPv6 basics
+    - Gateways and routing tables
+  - slug: tcp-and-udp
+    title: TCP and UDP
+    level: intermediate
+    covers:
+    - The three-way handshake and connection teardown
+    - Ports, sockets, connection states (TIME_WAIT, CLOSE_WAIT) and what they imply
+    - When UDP is the right choice
+- name: Names, web and security
+  folder: protocols
+  pages:
+  - slug: dns
+    title: DNS — how names become addresses
+    level: foundation
+    covers:
+    - Resolvers, root servers, authoritative servers, caching and TTLs
+    - Record types — A, AAAA, CNAME, MX, TXT, SRV
+    - Debugging with dig and common failure modes
+  - slug: http
+    title: HTTP — the language of the web
+    level: foundation
+    covers:
+    - Requests, responses, methods, status codes, headers
+    - HTTP/1.1 vs HTTP/2 vs HTTP/3
+    - Keep-alive, caching headers, cookies
+    - curl as a daily tool
+  - slug: tls-and-certificates
+    title: TLS and certificates
+    level: intermediate
+    covers:
+    - What encryption in transit protects against
+    - Certificates, chains, certificate authorities, SNI
+    - The handshake, mutual TLS
+    - Getting certificates with ACME and rotating them automatically
+- name: Infrastructure
+  folder: infrastructure
+  pages:
+  - slug: nat-and-firewalls
+    title: NAT and firewalls
+    level: intermediate
+    covers:
+    - How many devices share one public address
+    - Stateful firewalls, security groups, allow-lists
+    - iptables and nftables concepts
+  - slug: load-balancers-and-proxies
+    title: Load balancers and reverse proxies
+    level: intermediate
+    covers:
+    - L4 vs L7 load balancing
+    - Health checks, algorithms, sticky sessions
+    - Nginx, HAProxy and Envoy as examples
+- name: Debugging
+  folder: debugging
+  pages:
+  - slug: network-debugging-toolkit
+    title: The network debugging toolkit
+    level: intermediate
+    covers:
+    - ping, traceroute/mtr, dig, curl -v, ss, nc, openssl s_client, tcpdump
+    - A step-by-step method for "it can't connect"
+  - slug: lab-trace-a-request
+    title: 'Lab: trace one request through every layer'
+    level: intermediate
+    lab: true
+    covers:
+    - Capture a real HTTPS request with tcpdump and read the handshake
+    - Break DNS, break TLS, break the firewall, and diagnose each

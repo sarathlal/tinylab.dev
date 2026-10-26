@@ -1,0 +1,38 @@
+{% comment %}
+  On-page table of contents built from h2/h3 headings.
+  Uses kramdown's auto-generated heading ids. Set `toc: false` in front
+  matter to hide it on a page.
+{% endcomment %}
+<nav class="toc" id="toc" aria-label="On this page" hidden>
+  <div class="toc-title">On this page</div>
+  <ul id="toc-list"></ul>
+</nav>
+<script>
+  (function () {
+    var root = document.querySelector('.tutorial-content .entry-body');
+    var toc = document.getElementById('toc');
+    var list = document.getElementById('toc-list');
+    if (!root || !toc || !list) return;
+    var headings = root.querySelectorAll('h2, h3');
+    if (headings.length < 3) return;
+    var currentUl = list, lastH2Li = null;
+    headings.forEach(function (h) {
+      if (!h.id) return;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.replace(/#$/, '').trim();
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        list.appendChild(li);
+        lastH2Li = li;
+        currentUl = null;
+      } else {
+        if (!lastH2Li) { list.appendChild(li); return; }
+        if (!currentUl) { currentUl = document.createElement('ul'); lastH2Li.appendChild(currentUl); }
+        currentUl.appendChild(li);
+      }
+    });
+    toc.hidden = false;
+  })();
+</script>

@@ -1,0 +1,39 @@
+{% comment %}
+  Previous / next links across the whole track, in reading order
+  (section_order, then order). Pages without a `section` (the track index)
+  are excluded.
+{% endcomment %}
+{% assign track_pages = site[page.track] | where_exp: "p", "p.section" | where_exp: "p", "p.draft != true" %}
+{% assign keyed = "" | split: "" %}
+{% for p in track_pages %}
+  {% assign so = p.section_order | default: 999 | plus: 1000 %}
+  {% assign o = p.order | default: 999 | plus: 1000 %}
+  {% assign k = so | append: "-" | append: o | append: "::" | append: p.url %}
+  {% assign keyed = keyed | push: k %}
+{% endfor %}
+{% assign keyed = keyed | sort %}
+
+{% assign prev_url = nil %}{% assign next_url = nil %}{% assign found = false %}
+{% for k in keyed %}
+  {% assign u = k | split: "::" | last %}
+  {% if found and next_url == nil %}{% assign next_url = u %}{% endif %}
+  {% if u == page.url %}{% assign found = true %}{% endif %}
+  {% unless found %}{% assign prev_url = u %}{% endunless %}
+{% endfor %}
+
+{% if prev_url or next_url %}
+<nav class="pager" aria-label="Previous and next page">
+  {% if prev_url %}
+    {% assign prev_page = track_pages | where: "url", prev_url | first %}
+    <a class="pager-prev" href="{{ site.baseurl }}{{ prev_url }}" rel="prev">
+      <span class="pager-label">← Previous</span>{{ prev_page.title }}
+    </a>
+  {% endif %}
+  {% if next_url %}
+    {% assign next_page = track_pages | where: "url", next_url | first %}
+    <a class="pager-next" href="{{ site.baseurl }}{{ next_url }}" rel="next">
+      <span class="pager-label">Next →</span>{{ next_page.title }}
+    </a>
+  {% endif %}
+</nav>
+{% endif %}

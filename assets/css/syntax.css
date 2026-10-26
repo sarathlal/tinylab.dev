@@ -1,0 +1,83 @@
+/* ---------------------------------------------------------------------------
+   Rouge syntax highlighting, scoped to the theme switcher (html[data-theme]).
+   Light palette ≈ GitHub, dark palette ≈ GitHub Dark.
+   Classes are Rouge's standard token classes (kramdown css_class: highlight).
+   --------------------------------------------------------------------------- */
+
+.highlight { border-radius: 0.4rem; }
+.highlight pre { margin: 0; }
+.highlight .lineno { color: #8b949e; user-select: none; padding-right: 1rem; }
+
+/* ---- Light --------------------------------------------------------------- */
+html[data-theme="light"] .highlight,
+html[data-theme="light"] .highlight pre { background: #f6f8fa; color: #24292f; }
+html[data-theme="light"] .highlight .c, html[data-theme="light"] .highlight .c1,
+html[data-theme="light"] .highlight .cm, html[data-theme="light"] .highlight .cp,
+html[data-theme="light"] .highlight .cs { color: #6e7781; font-style: italic; }
+html[data-theme="light"] .highlight .err { color: #f85149; }
+html[data-theme="light"] .highlight .k, html[data-theme="light"] .highlight .kc,
+html[data-theme="light"] .highlight .kd, html[data-theme="light"] .highlight .kn,
+html[data-theme="light"] .highlight .kp, html[data-theme="light"] .highlight .kr,
+html[data-theme="light"] .highlight .kt, html[data-theme="light"] .highlight .kv { color: #cf222e; }
+html[data-theme="light"] .highlight .o, html[data-theme="light"] .highlight .ow { color: #0550ae; }
+html[data-theme="light"] .highlight .s, html[data-theme="light"] .highlight .s1,
+html[data-theme="light"] .highlight .s2, html[data-theme="light"] .highlight .sb,
+html[data-theme="light"] .highlight .sc, html[data-theme="light"] .highlight .sd,
+html[data-theme="light"] .highlight .se, html[data-theme="light"] .highlight .sh,
+html[data-theme="light"] .highlight .si, html[data-theme="light"] .highlight .sx,
+html[data-theme="light"] .highlight .sr, html[data-theme="light"] .highlight .ss,
+html[data-theme="light"] .highlight .dl { color: #0a3069; }
+html[data-theme="light"] .highlight .m, html[data-theme="light"] .highlight .mf,
+html[data-theme="light"] .highlight .mh, html[data-theme="light"] .highlight .mi,
+html[data-theme="light"] .highlight .mo, html[data-theme="light"] .highlight .il { color: #0550ae; }
+html[data-theme="light"] .highlight .na, html[data-theme="light"] .highlight .nb,
+html[data-theme="light"] .highlight .bp { color: #0550ae; }
+html[data-theme="light"] .highlight .nc, html[data-theme="light"] .highlight .nn,
+html[data-theme="light"] .highlight .nd { color: #953800; }
+html[data-theme="light"] .highlight .nf, html[data-theme="light"] .highlight .fm { color: #8250df; }
+html[data-theme="light"] .highlight .nt { color: #116329; }
+html[data-theme="light"] .highlight .nv, html[data-theme="light"] .highlight .vc,
+html[data-theme="light"] .highlight .vg, html[data-theme="light"] .highlight .vi { color: #953800; }
+html[data-theme="light"] .highlight .ge { font-style: italic; }
+html[data-theme="light"] .highlight .gs { font-weight: bold; }
+html[data-theme="light"] .highlight .gd { color: #82071e; background: #ffebe9; }
+html[data-theme="light"] .highlight .gi { color: #116329; background: #dafbe1; }
+html[data-theme="light"] .highlight .gh, html[data-theme="light"] .highlight .gu { color: #0550ae; font-weight: bold; }
+html[data-theme="light"] .highlight .gp { color: #6e7781; }
+
+/* ---- Dark ---------------------------------------------------------------- */
+html[data-theme="dark"] .highlight,
+html[data-theme="dark"] .highlight pre { background: #161b22; color: #e6edf3; }
+html[data-theme="dark"] .highlight .c, html[data-theme="dark"] .highlight .c1,
+html[data-theme="dark"] .highlight .cm, html[data-theme="dark"] .highlight .cp,
+html[data-theme="dark"] .highlight .cs { color: #8b949e; font-style: italic; }
+html[data-theme="dark"] .highlight .err { color: #ffa198; }
+html[data-theme="dark"] .highlight .k, html[data-theme="dark"] .highlight .kc,
+html[data-theme="dark"] .highlight .kd, html[data-theme="dark"] .highlight .kn,
+html[data-theme="dark"] .highlight .kp, html[data-theme="dark"] .highlight .kr,
+html[data-theme="dark"] .highlight .kt, html[data-theme="dark"] .highlight .kv { color: #ff7b72; }
+html[data-theme="dark"] .highlight .o, html[data-theme="dark"] .highlight .ow { color: #79c0ff; }
+html[data-theme="dark"] .highlight .s, html[data-theme="dark"] .highlight .s1,
+html[data-theme="dark"] .highlight .s2, html[data-theme="dark"] .highlight .sb,
+html[data-theme="dark"] .highlight .sc, html[data-theme="dark"] .highlight .sd,
+html[data-theme="dark"] .highlight .se, html[data-theme="dark"] .highlight .sh,
+html[data-theme="dark"] .highlight .si, html[data-theme="dark"] .highlight .sx,
+html[data-theme="dark"] .highlight .sr, html[data-theme="dark"] .highlight .ss,
+html[data-theme="dark"] .highlight .dl { color: #a5d6ff; }
+html[data-theme="dark"] .highlight .m, html[data-theme="dark"] .highlight .mf,
+html[data-theme="dark"] .highlight .mh, html[data-theme="dark"] .highlight .mi,
+html[data-theme="dark"] .highlight .mo, html[data-theme="dark"] .highlight .il { color: #79c0ff; }
+html[data-theme="dark"] .highlight .na, html[data-theme="dark"] .highlight .nb,
+html[data-theme="dark"] .highlight .bp { color: #79c0ff; }
+html[data-theme="dark"] .highlight .nc, html[data-theme="dark"] .highlight .nn,
+html[data-theme="dark"] .highlight .nd { color: #ffa657; }
+html[data-theme="dark"] .highlight .nf, html[data-theme="dark"] .highlight .fm { color: #d2a8ff; }
+html[data-theme="dark"] .highlight .nt { color: #7ee787; }
+html[data-theme="dark"] .highlight .nv, html[data-theme="dark"] .highlight .vc,
+html[data-theme="dark"] .highlight .vg, html[data-theme="dark"] .highlight .vi { color: #ffa657; }
+html[data-theme="dark"] .highlight .ge { font-style: italic; }
+html[data-theme="dark"] .highlight .gs { font-weight: bold; }
+html[data-theme="dark"] .highlight .gd { color: #ffa198; background: #490202; }
+html[data-theme="dark"] .highlight .gi { color: #7ee787; background: #04260f; }
+html[data-theme="dark"] .highlight .gh, html[data-theme="dark"] .highlight .gu { color: #79c0ff; font-weight: bold; }
+html[data-theme="dark"] .highlight .gp { color: #8b949e; }

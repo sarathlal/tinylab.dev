@@ -1,0 +1,136 @@
+# Prometheus curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py prometheus` turns it into stub pages under _prometheus/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: prometheus
+title: Prometheus
+sections:
+- name: Foundations
+  folder: foundations
+  pages:
+  - slug: why-prometheus
+    title: What Prometheus is and why it won
+    level: foundation
+    covers:
+    - Metrics vs logs vs traces
+    - Pull-based collection and why it matters
+    - Where Prometheus fits in a monitoring stack
+  - slug: install-and-first-scrape
+    title: Install Prometheus and scrape your first target
+    level: foundation
+    covers:
+    - Running Prometheus locally
+    - prometheus.yml, scrape configs, the targets page
+    - The expression browser
+  - slug: data-model
+    title: The data model — metrics, labels and types
+    level: foundation
+    covers:
+    - Time series, samples, labels
+    - Counter, gauge, histogram, summary
+    - Naming conventions
+  - slug: exporters-and-instrumentation
+    title: Exporters and instrumenting your own code
+    level: intermediate
+    covers:
+    - node_exporter, cAdvisor, blackbox and other exporters
+    - Client libraries and exposing /metrics
+    - What to measure — RED and USE
+- name: PromQL
+  folder: promql
+  pages:
+  - slug: promql-basics
+    title: PromQL — your first queries
+    level: foundation
+    covers:
+    - Selectors, matchers, instant vs range vectors
+    - rate and increase on counters
+    - Arithmetic and comparisons
+  - slug: promql-aggregation
+    title: Aggregating and joining
+    level: intermediate
+    covers:
+    - sum, avg, max by and without
+    - Vector matching, on and ignoring, group_left
+    - Common patterns and traps
+  - slug: histograms-and-percentiles
+    title: Histograms, percentiles and latency
+    level: intermediate
+    covers:
+    - How histogram buckets work
+    - histogram_quantile and its limits
+    - Native histograms
+  - slug: recording-rules
+    title: Recording rules — precomputing expensive queries
+    level: intermediate
+    covers:
+    - When to add a rule
+    - Naming conventions
+    - Rule evaluation and performance
+- name: Alerting
+  folder: alerting
+  pages:
+  - slug: alerting-rules
+    title: Alerting rules
+    level: intermediate
+    covers:
+    - Writing a rule, for, labels and annotations
+    - Testing rules with promtool
+    - Alerts that are actionable
+  - slug: alertmanager
+    title: Alertmanager — routing, grouping and silencing
+    level: intermediate
+    covers:
+    - Routes, receivers, inhibition, silences
+    - Notification channels
+    - High availability
+  - slug: slo-alerts
+    title: SLO-based alerting with burn rates
+    level: advanced
+    covers:
+    - Error budgets
+    - Multi-window burn-rate alerts
+    - Why symptom alerts beat cause alerts
+- name: In production
+  folder: production
+  pages:
+  - slug: service-discovery-and-kubernetes
+    title: Service discovery and running on Kubernetes
+    level: intermediate
+    covers:
+    - File, DNS and Kubernetes service discovery
+    - Relabelling
+    - kube-prometheus-stack and the Prometheus Operator
+  - slug: grafana-dashboards
+    title: Dashboards with Grafana
+    level: intermediate
+    covers:
+    - Connecting Grafana, building RED and USE panels
+    - Variables, annotations, dashboards as code
+  - slug: cardinality-and-performance
+    title: Cardinality, retention and performance
+    level: advanced
+    covers:
+    - What cardinality costs
+    - Finding expensive series
+    - TSDB internals, retention, WAL
+  - slug: scaling-and-long-term-storage
+    title: Scaling out — federation, Thanos and Mimir
+    level: advanced
+    covers:
+    - Limits of one server
+    - Remote write, Thanos, Mimir, VictoriaMetrics
+    - Global views and long retention
+- name: Lab
+  folder: lab
+  pages:
+  - slug: lab-monitor-an-app
+    title: 'Lab: monitor an application end to end'
+    level: intermediate
+    covers:
+    - Instrument a small app, scrape it on Kubernetes
+    - A dashboard, a recording rule and a burn-rate alert
+    - Trigger the alert with a bad deploy
+    lab: true

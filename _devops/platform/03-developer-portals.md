@@ -1,0 +1,23 @@
+---
+title: Developer portals and environments
+description: ''
+section: Platform engineering
+section_order: 8
+order: 3
+level: advanced
+draft: true
+sitemap: false
+date: '2026-10-27'
+covers:
+- Backstage
+- Preview environments per pull request
+---
+
+This page has not been written yet. Here is what it will cover when it is:
+
+- Backstage
+- Preview environments per pull request
+
+> **Note**
+> Want this page sooner? Open an issue or a pull request on [GitHub](https://github.com/sarathlal/tinylab.dev) — the outline above is the brief.
+{: .callout .callout-note}

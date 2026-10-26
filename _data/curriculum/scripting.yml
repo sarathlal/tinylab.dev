@@ -1,0 +1,63 @@
+# Scripting curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py scripting` turns it into stub pages under _scripting/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: scripting
+title: Scripting
+sections:
+- name: Bash
+  folder: bash
+  pages:
+  - slug: bash-essentials
+    title: Bash — the glue of operations
+    level: foundation
+    covers:
+    - Variables, quoting, conditionals, loops, functions
+    - Exit codes, set -euo pipefail, traps
+    - Reading input and arguments
+  - slug: text-processing
+    title: Text processing — grep, sed, awk, jq
+    level: intermediate
+    covers:
+    - Regular expressions that are worth memorising
+    - sed and awk for everyday transformations
+    - jq and yq for JSON and YAML
+  - slug: writing-reliable-scripts
+    title: Writing scripts you can trust
+    level: intermediate
+    covers:
+    - Idempotency, dry-run flags, logging
+    - ShellCheck
+    - When to stop writing Bash and switch to Python
+- name: Python
+  folder: python
+  pages:
+  - slug: python-for-operations
+    title: Python for operations
+    level: intermediate
+    covers:
+    - Running commands, handling files, calling HTTP APIs
+    - Argument parsing, virtual environments, packaging a small CLI
+    - Talking to cloud and Kubernetes APIs
+- name: Git
+  folder: git
+  pages:
+  - slug: git-for-devops
+    title: Git — the parts you will use every day
+    level: foundation
+    covers:
+    - Commits, branches, merges, rebases, conflicts
+    - Pull requests and code review etiquette
+    - Tags, releases and semantic versioning
+- name: Lab
+  folder: lab
+  pages:
+  - slug: lab-automation-toolkit
+    title: 'Lab: build a small automation toolkit'
+    level: intermediate
+    lab: true
+    covers:
+    - A log summariser, a certificate-expiry checker and a disk-usage reporter
+    - Tests and a README for each

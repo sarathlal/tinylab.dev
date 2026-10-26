@@ -1,30 +1,30 @@
 ---
 title: TinyLab
-layout: minimal
-description: Learn essential skills to start your first job or continue in your job.
+layout: page
+description: Plain-language tutorials for people building a career in tech — DevOps, Docker, Kubernetes, Linux, Python, Go, Rust and React — plus a daily AI news brief.
 sitemap:
   priority: 1
   changefreq: 'daily'
 ---
 
-<section class="coming-soon">
-  <h1>TinyLab</h1>
-  <p>Something small is brewing. Coming soon.</p>
-  <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-</section>
+# Learn tech the plain-language way
 
-<style>
-  body.minimal {
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .coming-soon h1 {
-    margin-bottom: 0.5rem;
-  }
-  .coming-soon p {
-    margin: 0.25rem 0;
-  }
-</style>
+TinyLab explains technical topics the way you'd explain them to a friend: an everyday example first, the real mechanism second, then something you can try yourself. Each subject is organised as a tutorial series you can read in order, and every page ends with a few questions to check what you learned.
+
+## Subjects
+
+{% include track-grid.html %}
+
+## Latest AI news
+
+{% assign news = site.ai_news | sort: "date" | reverse %}
+<ul class="archive">
+{% for entry in news limit: 5 %}
+  <li class="archive-item">
+    <span class="archive-date text-muted">{{ entry.date | date: "%b %-d" }}</span>
+    <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
+  </li>
+{% endfor %}
+</ul>
+
+[All AI news →]({{ site.baseurl }}/news/ai/)

@@ -1,0 +1,150 @@
+# Docker curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py docker` turns it into stub pages under _docker/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: docker
+title: Docker
+sections:
+- name: Foundations
+  folder: foundations
+  pages:
+  - slug: what-is-a-container
+    title: What is a container?
+    level: foundation
+  - slug: images-and-layers
+    title: Images, layers and why your image is 1.2 GB
+    level: foundation
+  - slug: what-happens-when-you-docker-run
+    title: What happens when you type docker run
+    level: intermediate
+  - slug: everyday-docker-commands
+    title: Everyday Docker commands
+    level: foundation
+    covers:
+    - run, ps, logs, exec, stop, rm, images, pull, push, build, inspect
+    - Lifecycle of a container and what each state means
+    - Cleaning up — prune and disk usage
+- name: Building images
+  folder: building
+  pages:
+  - slug: writing-a-dockerfile
+    title: Writing a Dockerfile you'd be happy to show a reviewer
+    level: intermediate
+  - slug: multi-stage-and-buildkit
+    title: Faster, smaller builds with BuildKit
+    level: intermediate
+    covers:
+    - BuildKit features — cache mounts, secrets, SSH forwarding, parallel stages
+    - Multi-platform images and manifests
+    - Reproducible builds and pinning
+  - slug: registries
+    title: Registries — storing and sharing images
+    level: intermediate
+    covers:
+    - Docker Hub, GHCR, ECR, GCR, Harbor
+    - Tags, digests, immutability and promotion
+    - Rate limits, pull-through caches, garbage collection
+- name: Running containers
+  folder: running
+  pages:
+  - slug: volumes-and-data
+    title: Volumes — where your data actually lives
+    level: foundation
+    covers:
+    - The writable layer and why it is not for data
+    - Named volumes vs bind mounts vs tmpfs
+    - File ownership and permissions across the boundary
+    - Backing up and migrating volumes
+  - slug: networking
+    title: Docker networking
+    level: intermediate
+    covers:
+    - bridge, host, none, overlay, macvlan
+    - Container DNS and service discovery
+    - Publishing ports and the iptables rules behind -p
+    - Container-to-container communication and isolation
+  - slug: environment-and-configuration
+    title: Configuration — environment variables, files and secrets
+    level: foundation
+    covers:
+    - ENV, --env, --env-file
+    - Mounting config files
+    - Why secrets don't belong in images or environment, and what to use instead
+  - slug: docker-compose
+    title: Docker Compose — running several containers together
+    level: foundation
+    covers:
+    - The compose file format, services, networks, volumes
+    - depends_on and healthcheck-based startup ordering
+    - Profiles, overrides, env files
+    - When Compose is enough and when it isn't
+  - slug: resource-limits
+    title: CPU and memory limits
+    level: intermediate
+    covers:
+    - --memory, --cpus and what the kernel does with them
+    - What an OOM kill looks like and how to see it
+    - Restart policies
+  - slug: pid-1-and-signals
+    title: PID 1, signals and graceful shutdown
+    level: intermediate
+    covers:
+    - Why the first process in a container is special
+    - Zombie reaping and init systems (tini, --init)
+    - Handling SIGTERM in your application
+  - slug: logging
+    title: Logging from containers
+    level: intermediate
+    covers:
+    - stdout/stderr convention and logging drivers
+    - Log rotation, json-file limits
+    - Shipping logs elsewhere
+- name: Security and debugging
+  folder: operations
+  pages:
+  - slug: security
+    title: Container security basics
+    level: intermediate
+    covers:
+    - Non-root users, read-only filesystems, dropping capabilities
+    - seccomp and AppArmor profiles
+    - Rootless Docker
+    - Image scanning with Trivy, SBOMs, signing with cosign
+  - slug: debugging-containers
+    title: Debugging a container that won't behave
+    level: intermediate
+    covers:
+    - A method for CrashLoop-style restarts, exit codes, missing files, permission errors
+    - exec, inspect, logs, stats, events, nsenter, docker debug
+    - Debugging images without a shell
+- name: Internals
+  folder: internals
+  pages:
+  - slug: container-internals
+    title: Inside the kernel — namespaces, cgroups and overlayfs
+    level: advanced
+    covers:
+    - Each namespace type and what it isolates
+    - cgroup v2 controllers and the files under /sys/fs/cgroup
+    - overlay2 on disk and whiteouts
+    - Building a container by hand with unshare and chroot
+  - slug: oci-and-runtimes
+    title: OCI, containerd, runc and the alternatives
+    level: advanced
+    covers:
+    - The OCI image and runtime specifications
+    - containerd, CRI-O, runc, crun, gVisor, Kata
+    - Running a container from an OCI bundle with runc
+- name: Lab
+  folder: lab
+  pages:
+  - slug: lab-containerise-an-app
+    title: 'Lab: containerise a real application'
+    level: intermediate
+    lab: true
+    covers:
+    - API + database + worker with Compose
+    - Multi-stage, non-root, healthchecks, under 100 MB
+    - Measure image size and build time before and after

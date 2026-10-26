@@ -1,0 +1,46 @@
+{% comment %}
+  Sidebar for a learning track.
+  Expects: page.track (collection name). Groups the collection's pages by
+  `section`, orders sections by `section_order` then pages by `order`.
+  A page with `section: false` (or none) is treated as the track index.
+{% endcomment %}
+{% assign track_key = page.track %}
+{% assign track_meta = site.data.tracks | where: "key", track_key | first %}
+{% assign track_pages = site[track_key] | where_exp: "p", "p.section" | sort: "order" %}
+{% assign sections = track_pages | map: "section" | uniq %}
+{% assign index_page = site[track_key] | where_exp: "p", "p.section == nil or p.section == false" | first %}
+
+<aside class="tutorial-sidebar">
+  <p class="track-title">
+    {% if index_page %}<a href="{{ site.baseurl }}{{ index_page.url }}">{% endif %}
+      {{ track_meta.icon }} {{ track_meta.title | default: track_key }}
+    {% if index_page %}</a>{% endif %}
+  </p>
+
+  {% comment %} Sort section names by the lowest section_order among their pages {% endcomment %}
+  {% assign ordered_sections = "" | split: "" %}
+  {% for s in sections %}
+    {% assign first_in = track_pages | where: "section", s | sort: "section_order" | first %}
+    {% assign so = first_in.section_order | default: 999 %}
+    {% assign so_padded = so | plus: 1000 %}
+    {% assign entry = so_padded | append: "::" | append: s %}
+    {% assign ordered_sections = ordered_sections | push: entry %}
+  {% endfor %}
+  {% assign ordered_sections = ordered_sections | sort %}
+
+  {% for entry in ordered_sections %}
+    {% assign parts = entry | split: "::" %}
+    {% assign s = parts[1] %}
+    {% assign pages_in = track_pages | where: "section", s | sort: "order" %}
+    {% assign open = false %}
+    {% if page.section == s %}{% assign open = true %}{% endif %}
+    <details{% if open %} open{% endif %}>
+      <summary>{{ s }}</summary>
+      <ul>
+        {% for p in pages_in %}
+          <li>{% if p.draft %}<span class="draft-link" title="Coming soon">{{ p.title }}</span>{% else %}<a href="{{ site.baseurl }}{{ p.url }}"{% if p.url == page.url %} class="active" aria-current="page"{% endif %}>{{ p.title }}</a>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </details>
+  {% endfor %}
+</aside>

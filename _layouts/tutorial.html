@@ -1,0 +1,45 @@
+---
+layout: default
+---
+{% assign track_meta = site.data.tracks | where: "key", page.track | first %}
+<div class="tutorial-wrap">
+  {% include tutorial-sidebar.html %}
+
+  <article class="tutorial-content" itemscope itemtype="http://schema.org/TechArticle">
+    <nav aria-label="Breadcrumb" class="text-muted" style="font-size:0.85rem;margin-bottom:0.5rem;">
+      <a href="{{ site.baseurl }}/learn/">Learn</a> ›
+      {% assign index_page = site[page.track] | where_exp: "p", "p.section == nil or p.section == false" | first %}
+      {% if index_page %}<a href="{{ site.baseurl }}{{ index_page.url }}">{{ track_meta.title | default: page.track }}</a>{% else %}{{ track_meta.title | default: page.track }}{% endif %}
+      {% if page.section %} › {{ page.section }}{% endif %}
+    </nav>
+
+    <h1 class="entry-title" itemprop="headline">{{ page.title }}</h1>
+
+    <div class="tutorial-meta">
+      {% if page.level %}<span class="badge badge-{{ page.level }}">{{ page.level }}</span>{% endif %}
+      {% if page.lab %}<span class="badge">Lab</span>{% endif %}
+      {% if page.reading_time %}<span>{{ page.reading_time }} min read</span>{% endif %}
+      {% if page.last_modified_at %}
+        <span>Updated <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time></span>
+      {% elsif page.date %}
+        <span>Updated <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time></span>
+      {% endif %}
+      {% if site.repository %}
+        <a href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}" rel="noopener">Edit this page</a>
+      {% endif %}
+    </div>
+
+    {% if page.draft %}
+    <div class="callout callout-note"><span class="callout-title">Coming soon</span><p>This page is planned but not written yet. The outline below is what it will cover.</p></div>
+    {% elsif page.description and page.description != "" %}<p class="text-muted"><em>{{ page.description }}</em></p>{% endif %}
+
+    {% unless page.toc == false %}{% include toc.html %}{% endunless %}
+
+    <div class="entry-body" itemprop="articleBody">
+      {{ content }}
+    </div>
+
+    {% if page.section %}{% include tutorial-pager.html %}{% endif %}
+  </article>
+</div>
+{% include anchorize-headings.html %}

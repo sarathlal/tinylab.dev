@@ -1,0 +1,18 @@
+{% comment %}
+  Reusable callout box.
+  Usage (inside a tutorial page):
+    {% capture body %}Markdown here{% endcapture %}
+    {% include callout.html type="analogy" title="The everyday picture" content=body %}
+  Types: analogy, try, check, mistake, note
+{% endcomment %}
+{% assign t = include.type | default: "note" %}
+{% assign default_titles = "analogy:The everyday picture|try:Try it yourself|check:Check your understanding|mistake:Common mistake|note:Note" | split: "|" %}
+{% assign auto_title = "" %}
+{% for pair in default_titles %}
+  {% assign kv = pair | split: ":" %}
+  {% if kv[0] == t %}{% assign auto_title = kv[1] %}{% endif %}
+{% endfor %}
+<div class="callout callout-{{ t }}">
+  <span class="callout-title">{{ include.title | default: auto_title }}</span>
+  {{ include.content | markdownify }}
+</div>

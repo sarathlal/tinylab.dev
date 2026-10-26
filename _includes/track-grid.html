@@ -1,0 +1,29 @@
+{% comment %} Subjects from _data/tracks.yml, grouped by `group` {% endcomment %}
+{% assign groups = site.data.tracks | map: "group" | uniq %}
+{% for g in groups %}
+<h3 class="track-group">{{ g }}</h3>
+<div class="track-grid">
+  {% assign in_group = site.data.tracks | where: "group", g %}
+  {% for track in in_group %}
+    {% assign index_page = site[track.key] | where_exp: "p", "p.section == nil or p.section == false" | first %}
+    {% assign page_count = site[track.key] | where_exp: "p", "p.section" | where_exp: "p", "p.draft != true" | size %}
+    {% assign planned_count = site[track.key] | where_exp: "p", "p.section" | size %}
+    <article class="track-card{% if track.status != 'active' %} planned{% endif %}">
+      <h3>
+        {{ track.icon }}
+        {% if track.status == 'active' and index_page %}
+          <a href="{{ site.baseurl }}{{ index_page.url }}">{{ track.title }}</a>
+        {% else %}
+          {{ track.title }}
+        {% endif %}
+      </h3>
+      <p>{{ track.tagline }}</p>
+      {% if track.status == 'active' %}
+        <span class="badge">{{ page_count }} of {{ planned_count }} pages</span>
+      {% else %}
+        <span class="badge">Coming soon</span>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>
+{% endfor %}

@@ -1,0 +1,139 @@
+# Terraform curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py terraform` turns it into stub pages under _terraform/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: terraform
+title: Terraform
+sections:
+- name: Foundations
+  folder: foundations
+  pages:
+  - slug: why-terraform
+    title: Why describe infrastructure in files, and why Terraform
+    level: foundation
+    covers:
+    - The problems with clicking in a console
+    - Declarative vs imperative, idempotency
+    - Terraform and OpenTofu; where Pulumi, CloudFormation and Crossplane fit
+  - slug: install-and-first-project
+    title: Install Terraform and create your first resource
+    level: foundation
+    covers:
+    - Installing Terraform/OpenTofu and a provider
+    - init, plan, apply, destroy on one small resource
+    - Reading a plan before applying it
+  - slug: hcl-language
+    title: The HCL language — variables, outputs, expressions
+    level: foundation
+    covers:
+    - Blocks, arguments, types
+    - Variables, locals, outputs
+    - Expressions, conditionals, for-each and count, built-in functions
+  - slug: providers-and-resources
+    title: Providers, resources and data sources
+    level: foundation
+    covers:
+    - How providers work and are versioned
+    - Resource lifecycle and meta-arguments
+    - Data sources and implicit vs explicit dependencies
+- name: State
+  folder: state
+  pages:
+  - slug: terraform-state
+    title: State — the file that knows what exists
+    level: intermediate
+    covers:
+    - What state is and why it must be shared and locked
+    - Remote backends
+    - import, moved, drift and refresh
+  - slug: remote-backends
+    title: Remote backends and locking
+    level: intermediate
+    covers:
+    - S3/GCS/Azure backends, state locking
+    - Encrypting and protecting state
+    - Migrating state between backends
+  - slug: import-and-drift
+    title: Importing existing infrastructure and handling drift
+    level: intermediate
+    covers:
+    - import blocks and the import command
+    - Detecting and reconciling drift
+    - moved and removed blocks, refactoring safely
+- name: Structure
+  folder: structure
+  pages:
+  - slug: terraform-modules
+    title: Modules — reusable infrastructure
+    level: intermediate
+    covers:
+    - Writing, versioning and publishing modules
+    - Structuring repositories and environments
+    - Blast radius and state splitting
+  - slug: environments-and-workspaces
+    title: Environments — workspaces, directories and variable files
+    level: intermediate
+    covers:
+    - Workspaces vs directory-per-environment
+    - tfvars and variable precedence
+    - Keeping environments identical where it matters
+  - slug: repository-layout
+    title: Repository layout and blast radius
+    level: intermediate
+    covers:
+    - Splitting state by lifecycle and risk
+    - Sharing outputs between stacks
+    - Terragrunt and stacks
+- name: Automation
+  folder: automation
+  pages:
+  - slug: terraform-in-ci
+    title: Terraform in a pipeline
+    level: intermediate
+    covers:
+    - plan on pull request, apply on merge
+    - Policy as code — OPA, Checkov
+    - Testing modules
+  - slug: testing
+    title: Testing Terraform
+    level: intermediate
+    covers:
+    - validate, fmt, tflint
+    - Native test framework and Terratest
+    - What is worth testing
+  - slug: policy-as-code
+    title: Policy as code — stopping bad plans
+    level: intermediate
+    covers:
+    - OPA/Conftest, Checkov, Sentinel
+    - Writing a first policy
+    - Enforcing in CI
+- name: Going deeper
+  folder: deeper
+  pages:
+  - slug: how-terraform-works
+    title: How Terraform works inside
+    level: advanced
+    covers:
+    - The dependency graph and parallelism
+    - Provider plugins and the protocol
+    - Why plan output looks the way it does
+  - slug: writing-a-provider
+    title: Writing a small provider
+    level: advanced
+    covers:
+    - The plugin framework
+    - Schema, CRUD, acceptance tests
+- name: Lab
+  folder: lab
+  pages:
+  - slug: lab-provision-a-cluster
+    title: 'Lab: provision a VPC and a Kubernetes cluster'
+    level: intermediate
+    covers:
+    - A VPC, a managed cluster and a registry with remote state and modules
+    - plan in CI on pull requests with a policy check
+    - Tear it all down
+    lab: true

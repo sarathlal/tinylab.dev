@@ -1,60 +1,14 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ page.content | strip_html | strip | truncate: 160 }}{% endif %}">
-  <link rel="icon" href="{{ site.url }}/favicon.ico" sizes="32x32" />
-  <link rel="icon" href="{{ site.url }}/siteicon.png" sizes="152x152" />
-  <link rel="apple-touch-icon-precomposed" href="{{ site.url }}/siteicon.png" />
-  <meta name="msapplication-TileImage" content="{{ site.url }}/siteicon.png" />
-  <link rel="stylesheet" href="{{ site.url }}/assets/css/pico.min.css"/>
-	<style>
-@media (min-width:1024px) {
-  .container {
-    max-width:800px
-  }
-}
-code, kbd {
-  padding: .150rem .375rem;
-}
-
-/* Custom styles to display anchor tags as normal text */
-a.normal-text {
-  text-decoration: none; /* Remove underline */
-  color: inherit;        /* Inherit color from parent element */
-}
-
-/* Theme toggle */
-.theme-toggle {
-  background: transparent;
-  border: 0;
-  padding: 0.4rem;
-  margin: 0;
-  width: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: inherit;
-  cursor: pointer;
-  line-height: 0;
-}
-.theme-toggle:hover,
-.theme-toggle:focus {
-  background: transparent;
-  color: var(--pico-primary, currentColor);
-  outline: none;
-}
-.theme-toggle .theme-icon { display: none; }
-html[data-theme-scheme="light"] .theme-toggle .theme-icon-sun  { display: inline-block; }
-html[data-theme-scheme="dark"]  .theme-toggle .theme-icon-moon { display: inline-block; }
-html[data-theme-scheme="auto"]  .theme-toggle .theme-icon-auto { display: inline-block; }
-header nav h2 { margin: 0; }
-.theme-toggle-floating {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-}
-	</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% seo %}
+  {% if page.draft %}<meta name="robots" content="noindex">{% endif %}
+  <link rel="icon" href="{{ site.baseurl }}/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="{{ site.baseurl }}/siteicon.png" sizes="152x152" />
+  <link rel="apple-touch-icon-precomposed" href="{{ site.baseurl }}/siteicon.png" />
+  <meta name="msapplication-TileImage" content="{{ site.baseurl }}/siteicon.png" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/pico.min.css"/>
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/site.css"/>
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/syntax.css"/>
+  {% feed_meta %}
 </head>

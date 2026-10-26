@@ -1,0 +1,171 @@
+# Linux curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py linux` turns it into stub pages under _linux/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: linux
+title: Linux
+sections:
+- name: Getting started
+  folder: getting-started
+  pages:
+  - slug: what-is-linux
+    title: What is Linux and why servers run it
+    level: foundation
+    covers:
+    - Kernel vs distribution vs desktop environment
+    - Major distribution families (Debian/Ubuntu, RHEL/Fedora, Alpine, Arch) and when each is used
+    - The Unix philosophy and why it still shapes tooling
+  - slug: terminal-survival-guide
+    title: Terminal survival guide
+    level: foundation
+    covers:
+    - Moving around, listing, reading and editing files
+    - Pipes, redirection and exit codes
+    - Getting help — man, --help, tldr
+    - Keyboard shortcuts and a sane shell configuration
+  - slug: filesystem-layout
+    title: The filesystem — where everything lives
+    level: foundation
+    covers:
+    - The Filesystem Hierarchy Standard, directory by directory
+    - Absolute vs relative paths, hidden files, symlinks and hard links
+    - Mount points and what "everything is a file" means
+  - slug: package-management
+    title: Installing software — package managers
+    level: foundation
+    covers:
+    - apt, dnf, apk, pacman — the same ideas, different spellings
+    - Repositories, signing keys, pinning versions
+    - Building from source and when to avoid it
+  - slug: ssh
+    title: SSH — working on machines you can't touch
+    level: foundation
+    covers:
+    - Keys vs passwords, ssh-agent, config file
+    - Tunnels, port forwarding, jump hosts
+    - Hardening sshd
+- name: Users and processes
+  folder: users-and-processes
+  pages:
+  - slug: users-groups-permissions
+    title: Users, groups and permissions
+    level: foundation
+    covers:
+    - Owners, groups, rwx bits and octal notation
+    - sudo, root, and why services run as unprivileged users
+    - setuid, setgid, sticky bit, umask, ACLs
+  - slug: processes
+    title: Processes — what is running and why
+    level: foundation
+    covers:
+    - PIDs, parents and children, the process tree
+    - Process states, zombies and orphans
+    - Signals and what SIGTERM, SIGKILL and SIGHUP mean
+    - ps, top, htop, pgrep, kill, nice
+  - slug: systemd-and-services
+    title: systemd — how services start, stop and restart
+    level: intermediate
+    covers:
+    - Boot sequence from firmware to login
+    - Units, targets, dependencies and the unit file format
+    - systemctl, journalctl, timers as a cron replacement
+    - Writing and debugging your own service unit
+  - slug: cron-and-scheduling
+    title: Running things on a schedule
+    level: foundation
+    covers:
+    - crontab syntax and common mistakes
+    - systemd timers
+    - Locking and idempotency for scheduled jobs
+  - slug: logs-and-journald
+    title: Logs — where to look when something breaks
+    level: foundation
+    covers:
+    - /var/log, syslog and journald
+    - Reading, filtering and following logs
+    - Log rotation and disk pressure
+- name: Memory, storage and performance
+  folder: resources
+  pages:
+  - slug: memory
+    title: Memory — what "free" actually means
+    level: intermediate
+    covers:
+    - Virtual vs resident memory, shared pages, the page cache
+    - Reading free, /proc/meminfo and top correctly
+    - Swap and the OOM killer, and how it chooses a victim
+  - slug: storage-and-filesystems
+    title: Disks, partitions and filesystems
+    level: intermediate
+    covers:
+    - Block devices, partitions, LVM
+    - ext4 vs xfs vs btrfs; inodes and why a disk can be "full" with space left
+    - Mounting, fstab, df vs du, finding what filled a disk
+  - slug: performance-basics
+    title: Performance — is the machine busy, and with what?
+    level: intermediate
+    covers:
+    - Load average and what it really measures
+    - CPU, memory, disk and network bottlenecks with vmstat, iostat, sar
+    - The USE method as a checklist
+- name: Networking on Linux
+  folder: networking
+  pages:
+  - slug: networking-on-linux
+    title: Networking on a Linux machine
+    level: intermediate
+    covers:
+    - Interfaces, addresses, routes with ip
+    - ss, netstat, lsof for open ports and connections
+    - /etc/hosts, resolv.conf and name resolution order
+    - firewalld, ufw and the iptables/nftables underneath
+- name: Deep dive
+  folder: deep-dive
+  pages:
+  - slug: boot-process
+    title: How a Linux machine boots
+    level: advanced
+    covers:
+    - Firmware, bootloader, kernel, initramfs, init
+    - What to look at when a machine will not boot
+  - slug: kernel-and-syscalls
+    title: The kernel and system calls
+    level: advanced
+    covers:
+    - User space vs kernel space
+    - Tracing system calls with strace
+    - /proc and /sys as windows into the kernel
+  - slug: namespaces-and-cgroups
+    title: Namespaces and cgroups
+    level: advanced
+    covers:
+    - Each namespace type and what it isolates
+    - cgroup v2 controllers and files
+    - Building an isolated process by hand with unshare
+  - slug: io-and-the-page-cache
+    title: I/O, the page cache and why writes are fast
+    level: advanced
+    covers:
+    - Buffered vs direct I/O
+    - sync, fsync and data safety
+    - Reading iostat and biotop
+  - slug: tracing-and-ebpf
+    title: Tracing with perf and eBPF
+    level: advanced
+    covers:
+    - perf for CPU profiling and flame graphs
+    - bpftrace one-liners
+    - When to reach for which tool
+- name: Lab
+  folder: lab
+  pages:
+  - slug: lab-broken-server
+    title: 'Lab: fix a deliberately broken server'
+    level: intermediate
+    lab: true
+    covers:
+    - A VM with five planted faults (disk full, failed service, bad DNS, firewall rule, runaway process)
+    - A method for diagnosing each
+    - Writing a short root-cause note
