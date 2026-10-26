@@ -2,7 +2,7 @@
 title: GitOps — Git as the source of truth
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 7
 level: intermediate
 draft: true

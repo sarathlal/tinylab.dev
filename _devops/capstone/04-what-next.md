@@ -2,7 +2,7 @@
 title: Where to go from here
 description: ''
 section: Capstone project
-section_order: 14
+section_order: 9
 order: 4
 level: foundation
 draft: true

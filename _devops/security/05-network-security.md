@@ -2,7 +2,7 @@
 title: Network security — zero trust in practice
 description: ''
 section: Security
-section_order: 11
+section_order: 6
 order: 5
 level: advanced
 draft: true

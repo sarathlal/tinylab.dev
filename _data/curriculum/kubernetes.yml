@@ -1,0 +1,183 @@
+# Kubernetes curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py kubernetes` turns it into stub pages under _kubernetes/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
+#
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
+
+track: kubernetes
+title: Kubernetes
+sections:
+- name: Foundations
+  folder: foundations
+  pages:
+  - slug: why-kubernetes
+    title: Why Kubernetes exists
+    level: foundation
+    covers:
+    - The problems of running containers on many machines by hand
+    - What an orchestrator does — scheduling, healing, scaling, networking
+    - When Kubernetes is the wrong tool
+  - slug: architecture
+    title: Architecture — control plane and nodes
+    level: foundation
+    covers:
+    - API server, etcd, scheduler, controller manager, kubelet, kube-proxy
+    - The reconciliation loop and desired vs actual state
+    - What happens when you apply a Deployment
+  - slug: local-cluster
+    title: Running a cluster on your laptop
+    level: foundation
+    covers:
+    - kind, k3s, minikube — choosing one
+    - kubectl setup, contexts and namespaces
+    - Your first Pod
+  - slug: pods
+    title: Pods — the smallest thing you can run
+    level: foundation
+    covers:
+    - Why a Pod and not a container
+    - Multi-container Pods, init containers, sidecars
+    - Pod lifecycle and phases
+  - slug: deployments-and-replicasets
+    title: Deployments — running and updating copies of an app
+    level: foundation
+    covers:
+    - ReplicaSets, rolling updates, rollbacks, history
+    - Strategy settings — maxSurge, maxUnavailable
+    - DaemonSets and StatefulSets compared
+- name: Networking
+  folder: networking
+  pages:
+  - slug: services-and-dns
+    title: Services — giving Pods a stable address
+    level: foundation
+    covers:
+    - ClusterIP, NodePort, LoadBalancer, ExternalName
+    - Endpoints, EndpointSlices, cluster DNS
+    - How kube-proxy routes traffic
+  - slug: ingress-and-gateway
+    title: Ingress and Gateway API — traffic from outside
+    level: intermediate
+    covers:
+    - Ingress controllers and resources
+    - Gateway API and why it is replacing Ingress
+    - TLS termination and cert-manager
+  - slug: network-policies
+    title: Network policies — who can talk to whom
+    level: intermediate
+    covers:
+    - CNI plugins and what they provide
+    - Default-deny and allow rules
+    - Testing a policy
+- name: Configuration and storage
+  folder: config-and-storage
+  pages:
+  - slug: configmaps-and-secrets
+    title: ConfigMaps and Secrets
+    level: foundation
+    covers:
+    - Injecting configuration as env vars and files
+    - Why Secrets aren't secret by default and how to fix that
+    - External Secrets Operator, sealed secrets
+  - slug: storage
+    title: Storage — volumes that outlive Pods
+    level: intermediate
+    covers:
+    - PersistentVolumes, PersistentVolumeClaims, StorageClasses
+    - Access modes, dynamic provisioning, CSI drivers
+    - StatefulSets and volumeClaimTemplates
+    - Backups with Velero
+- name: Running workloads well
+  folder: workloads
+  pages:
+  - slug: probes-and-health
+    title: Health checks — liveness, readiness and startup probes
+    level: intermediate
+    covers:
+    - What each probe is for and what happens when it fails
+    - Common misconfigurations that cause outages
+    - Graceful shutdown and terminationGracePeriodSeconds
+  - slug: resources-and-scheduling
+    title: Requests, limits and how the scheduler decides
+    level: intermediate
+    covers:
+    - CPU vs memory limits and what happens when you exceed each
+    - QoS classes, evictions
+    - Node selectors, affinity, taints and tolerations, topology spread
+  - slug: autoscaling
+    title: Autoscaling — Pods and nodes
+    level: intermediate
+    covers:
+    - HorizontalPodAutoscaler on CPU and custom metrics
+    - VerticalPodAutoscaler, KEDA
+    - Cluster Autoscaler and Karpenter
+  - slug: namespaces-rbac
+    title: Namespaces, RBAC and service accounts
+    level: intermediate
+    covers:
+    - Roles, ClusterRoles, bindings
+    - Service accounts and workload identity
+    - Resource quotas and limit ranges for multi-tenancy
+- name: Packaging
+  folder: packaging
+  pages:
+  - slug: helm
+    title: Helm — packaging applications
+    level: intermediate
+    covers:
+    - Charts, values, templates, releases
+    - Writing a chart for your own app
+    - Chart repositories and dependency management
+  - slug: kustomize
+    title: Kustomize — configuration without templates
+    level: intermediate
+    covers:
+    - Bases and overlays
+    - Patches and generators
+    - Helm vs Kustomize
+- name: Operations
+  folder: operations
+  pages:
+  - slug: troubleshooting
+    title: Troubleshooting — Pending, CrashLoopBackOff, ImagePullBackOff and friends
+    level: intermediate
+    covers:
+    - A diagnosis method using describe, logs, events, exec and ephemeral containers
+    - Each common failure state and its usual causes
+    - Node-level problems — NotReady, disk pressure, kubelet logs
+  - slug: operations
+    title: Operating a cluster — upgrades, backups and capacity
+    level: advanced
+    covers:
+    - Upgrading control plane and nodes, version skew policy
+    - etcd backup and restore
+    - Draining nodes, PodDisruptionBudgets, capacity planning
+- name: Internals and extension
+  folder: internals
+  pages:
+  - slug: operators-and-crds
+    title: Extending Kubernetes — CRDs and operators
+    level: advanced
+    covers:
+    - Custom resources and controllers
+    - The reconcile loop in your own code with Kubebuilder
+    - When an operator is the right tool
+  - slug: internals
+    title: Inside the control plane
+    level: advanced
+    covers:
+    - API server request flow — authentication, authorisation, admission
+    - Watches, informers, leader election
+    - etcd and Raft, scheduler framework
+    - Networking data path with iptables, IPVS and eBPF
+- name: Lab
+  folder: lab
+  pages:
+  - slug: lab-deploy-the-app
+    title: 'Lab: deploy the project to Kubernetes'
+    level: intermediate
+    lab: true
+    covers:
+    - Deployments, Services, Ingress, probes, limits, ConfigMaps and Secrets
+    - A Helm chart, HPA, PDB and NetworkPolicy
+    - Break it on purpose and recover

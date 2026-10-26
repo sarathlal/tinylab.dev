@@ -2,7 +2,7 @@
 title: What CI and CD actually mean
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 1
 level: foundation
 draft: true

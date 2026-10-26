@@ -2,7 +2,7 @@
 title: Progressive delivery as a platform feature
 description: ''
 section: Platform engineering
-section_order: 13
+section_order: 8
 order: 4
 level: advanced
 draft: true

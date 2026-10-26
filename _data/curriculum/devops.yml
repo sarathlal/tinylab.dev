@@ -1,956 +1,389 @@
-# DevOps track curriculum.
+# DevOps curriculum — the single source of truth for this subject's structure.
+# `python3 scripts/scaffold.py devops` turns it into stub pages under _devops/.
+# Existing pages are never overwritten. See CLAUDE.md for the writing standard.
 #
-# This file is the single source of truth for the track's structure.
-# `scripts/scaffold.py devops` turns it into stub pages under _devops/;
-# existing pages are never overwritten. Write each page later by replacing
-# the stub's body (see CLAUDE.md for the writing standard).
-#
-# Fields per page:
-#   slug     file name (without NN- prefix or .md); becomes the URL
-#   title    page title
-#   level    foundation | intermediate | advanced
-#   covers   bullet list of what the finished page must explain
-#   lab      true for hands-on lab pages
+# Fields per page: slug, title, level (foundation|intermediate|advanced), covers (outline), lab (true for labs)
 
 track: devops
 title: DevOps
-
 sections:
-
-  - name: Getting started
-    folder: getting-started
-    pages:
-      - slug: what-is-devops
-        title: What is DevOps, really?
-        level: foundation
-        covers:
-          - The problem DevOps solves — the wall between "writing software" and "running software"
-          - What a DevOps engineer actually does day to day
-          - The toolchain at a glance and how the sections of this course map to it
-          - Related roles — SRE, platform engineer, cloud engineer — and how they differ
-      - slug: setting-up-your-machine
-        title: Setting up your machine
-        level: foundation
-        covers:
-          - Installing a terminal, Git, Docker and a code editor on Linux, macOS and Windows (WSL2)
-          - Creating a free GitHub account and SSH keys
-          - A scratch Linux VM or cloud free tier for experiments
-          - How to check everything works
-      - slug: terminal-survival-guide
-        title: Terminal survival guide
-        level: foundation
-        covers:
-          - Moving around, listing, reading and editing files
-          - Pipes, redirection and exit codes
-          - Getting help — man, --help, tldr
-          - Keyboard shortcuts and a sane shell configuration
-      - slug: how-to-learn-this-course
-        title: How to learn this course
-        level: foundation
-        covers:
-          - Reading order and how the sections depend on each other
-          - Keeping a lab notebook and a portfolio repository
-          - When to skip ahead and when not to
-
-  - name: Linux
-    folder: linux
-    pages:
-      - slug: what-is-linux
-        title: What is Linux and why servers run it
-        level: foundation
-        covers:
-          - Kernel vs distribution vs desktop environment
-          - Major distribution families (Debian/Ubuntu, RHEL/Fedora, Alpine, Arch) and when each is used
-          - The Unix philosophy and why it still shapes tooling
-      - slug: filesystem-layout
-        title: The filesystem — where everything lives
-        level: foundation
-        covers:
-          - The Filesystem Hierarchy Standard, directory by directory
-          - Absolute vs relative paths, hidden files, symlinks and hard links
-          - Mount points and what "everything is a file" means
-      - slug: users-groups-permissions
-        title: Users, groups and permissions
-        level: foundation
-        covers:
-          - Owners, groups, rwx bits and octal notation
-          - sudo, root, and why services run as unprivileged users
-          - setuid, setgid, sticky bit, umask, ACLs
-      - slug: processes
-        title: Processes — what is running and why
-        level: foundation
-        covers:
-          - PIDs, parents and children, the process tree
-          - Process states, zombies and orphans
-          - Signals and what SIGTERM, SIGKILL and SIGHUP mean
-          - ps, top, htop, pgrep, kill, nice
-      - slug: systemd-and-services
-        title: systemd — how services start, stop and restart
-        level: intermediate
-        covers:
-          - Boot sequence from firmware to login
-          - Units, targets, dependencies and the unit file format
-          - systemctl, journalctl, timers as a cron replacement
-          - Writing and debugging your own service unit
-      - slug: package-management
-        title: Installing software — package managers
-        level: foundation
-        covers:
-          - apt, dnf, apk, pacman — the same ideas, different spellings
-          - Repositories, signing keys, pinning versions
-          - Building from source and when to avoid it
-      - slug: memory
-        title: Memory — what "free" actually means
-        level: intermediate
-        covers:
-          - Virtual vs resident memory, shared pages, the page cache
-          - Reading free, /proc/meminfo and top correctly
-          - Swap and the OOM killer, and how it chooses a victim
-      - slug: storage-and-filesystems
-        title: Disks, partitions and filesystems
-        level: intermediate
-        covers:
-          - Block devices, partitions, LVM
-          - ext4 vs xfs vs btrfs; inodes and why a disk can be "full" with space left
-          - Mounting, fstab, df vs du, finding what filled a disk
-      - slug: performance-basics
-        title: Performance — is the machine busy, and with what?
-        level: intermediate
-        covers:
-          - Load average and what it really measures
-          - CPU, memory, disk and network bottlenecks with vmstat, iostat, sar
-          - The USE method as a checklist
-      - slug: logs-and-journald
-        title: Logs — where to look when something breaks
-        level: foundation
-        covers:
-          - /var/log, syslog and journald
-          - Reading, filtering and following logs
-          - Log rotation and disk pressure
-      - slug: networking-on-linux
-        title: Networking on a Linux machine
-        level: intermediate
-        covers:
-          - Interfaces, addresses, routes with ip
-          - ss, netstat, lsof for open ports and connections
-          - /etc/hosts, resolv.conf and name resolution order
-          - firewalld, ufw and the iptables/nftables underneath
-      - slug: ssh
-        title: SSH — working on machines you can't touch
-        level: foundation
-        covers:
-          - Keys vs passwords, ssh-agent, config file
-          - Tunnels, port forwarding, jump hosts
-          - Hardening sshd
-      - slug: cron-and-scheduling
-        title: Running things on a schedule
-        level: foundation
-        covers:
-          - crontab syntax and common mistakes
-          - systemd timers
-          - Locking and idempotency for scheduled jobs
-      - slug: lab-broken-server
-        title: "Lab: fix a deliberately broken server"
-        level: intermediate
-        lab: true
-        covers:
-          - A VM with five planted faults (disk full, failed service, bad DNS, firewall rule, runaway process)
-          - A method for diagnosing each
-          - Writing a short root-cause note
-
-  - name: Networking
-    folder: networking
-    pages:
-      - slug: how-the-internet-works
-        title: How a request gets from your browser to a server
-        level: foundation
-        covers:
-          - The layered model from cable to application, with one request traced end to end
-          - Where DNS, TCP, TLS and HTTP each fit
-      - slug: ip-addresses-and-subnets
-        title: IP addresses, subnets and CIDR
-        level: foundation
-        covers:
-          - IPv4 structure, private ranges, CIDR notation and subnet arithmetic
-          - IPv6 basics
-          - Gateways and routing tables
-      - slug: tcp-and-udp
-        title: TCP and UDP
-        level: intermediate
-        covers:
-          - The three-way handshake and connection teardown
-          - Ports, sockets, connection states (TIME_WAIT, CLOSE_WAIT) and what they imply
-          - When UDP is the right choice
-      - slug: dns
-        title: DNS — how names become addresses
-        level: foundation
-        covers:
-          - Resolvers, root servers, authoritative servers, caching and TTLs
-          - Record types — A, AAAA, CNAME, MX, TXT, SRV
-          - Debugging with dig and common failure modes
-      - slug: http
-        title: HTTP — the language of the web
-        level: foundation
-        covers:
-          - Requests, responses, methods, status codes, headers
-          - HTTP/1.1 vs HTTP/2 vs HTTP/3
-          - Keep-alive, caching headers, cookies
-          - curl as a daily tool
-      - slug: tls-and-certificates
-        title: TLS and certificates
-        level: intermediate
-        covers:
-          - What encryption in transit protects against
-          - Certificates, chains, certificate authorities, SNI
-          - The handshake, mutual TLS
-          - Getting certificates with ACME and rotating them automatically
-      - slug: nat-and-firewalls
-        title: NAT and firewalls
-        level: intermediate
-        covers:
-          - How many devices share one public address
-          - Stateful firewalls, security groups, allow-lists
-          - iptables and nftables concepts
-      - slug: load-balancers-and-proxies
-        title: Load balancers and reverse proxies
-        level: intermediate
-        covers:
-          - L4 vs L7 load balancing
-          - Health checks, algorithms, sticky sessions
-          - Nginx, HAProxy and Envoy as examples
-      - slug: network-debugging-toolkit
-        title: The network debugging toolkit
-        level: intermediate
-        covers:
-          - ping, traceroute/mtr, dig, curl -v, ss, nc, openssl s_client, tcpdump
-          - A step-by-step method for "it can't connect"
-      - slug: lab-trace-a-request
-        title: "Lab: trace one request through every layer"
-        level: intermediate
-        lab: true
-        covers:
-          - Capture a real HTTPS request with tcpdump and read the handshake
-          - Break DNS, break TLS, break the firewall, and diagnose each
-
-  - name: Docker
-    folder: docker
-    pages:
-      - slug: what-is-a-container
-        title: What is a container?
-        level: foundation
-      - slug: images-and-layers
-        title: Images, layers and why your image is 1.2 GB
-        level: foundation
-      - slug: writing-a-dockerfile
-        title: Writing a Dockerfile you'd be happy to show a reviewer
-        level: intermediate
-      - slug: what-happens-when-you-docker-run
-        title: What happens when you type docker run
-        level: intermediate
-      - slug: everyday-docker-commands
-        title: Everyday Docker commands
-        level: foundation
-        covers:
-          - run, ps, logs, exec, stop, rm, images, pull, push, build, inspect
-          - Lifecycle of a container and what each state means
-          - Cleaning up — prune and disk usage
-      - slug: volumes-and-data
-        title: Volumes — where your data actually lives
-        level: foundation
-        covers:
-          - The writable layer and why it is not for data
-          - Named volumes vs bind mounts vs tmpfs
-          - File ownership and permissions across the boundary
-          - Backing up and migrating volumes
-      - slug: networking
-        title: Docker networking
-        level: intermediate
-        covers:
-          - bridge, host, none, overlay, macvlan
-          - Container DNS and service discovery
-          - Publishing ports and the iptables rules behind -p
-          - Container-to-container communication and isolation
-      - slug: environment-and-configuration
-        title: Configuration — environment variables, files and secrets
-        level: foundation
-        covers:
-          - ENV, --env, --env-file
-          - Mounting config files
-          - Why secrets don't belong in images or environment, and what to use instead
-      - slug: docker-compose
-        title: Docker Compose — running several containers together
-        level: foundation
-        covers:
-          - The compose file format, services, networks, volumes
-          - depends_on and healthcheck-based startup ordering
-          - Profiles, overrides, env files
-          - When Compose is enough and when it isn't
-      - slug: resource-limits
-        title: CPU and memory limits
-        level: intermediate
-        covers:
-          - --memory, --cpus and what the kernel does with them
-          - What an OOM kill looks like and how to see it
-          - Restart policies
-      - slug: pid-1-and-signals
-        title: PID 1, signals and graceful shutdown
-        level: intermediate
-        covers:
-          - Why the first process in a container is special
-          - Zombie reaping and init systems (tini, --init)
-          - Handling SIGTERM in your application
-      - slug: logging
-        title: Logging from containers
-        level: intermediate
-        covers:
-          - stdout/stderr convention and logging drivers
-          - Log rotation, json-file limits
-          - Shipping logs elsewhere
-      - slug: multi-stage-and-buildkit
-        title: Faster, smaller builds with BuildKit
-        level: intermediate
-        covers:
-          - BuildKit features — cache mounts, secrets, SSH forwarding, parallel stages
-          - Multi-platform images and manifests
-          - Reproducible builds and pinning
-      - slug: registries
-        title: Registries — storing and sharing images
-        level: intermediate
-        covers:
-          - Docker Hub, GHCR, ECR, GCR, Harbor
-          - Tags, digests, immutability and promotion
-          - Rate limits, pull-through caches, garbage collection
-      - slug: security
-        title: Container security basics
-        level: intermediate
-        covers:
-          - Non-root users, read-only filesystems, dropping capabilities
-          - seccomp and AppArmor profiles
-          - Rootless Docker
-          - Image scanning with Trivy, SBOMs, signing with cosign
-      - slug: debugging-containers
-        title: Debugging a container that won't behave
-        level: intermediate
-        covers:
-          - A method for CrashLoop-style restarts, exit codes, missing files, permission errors
-          - exec, inspect, logs, stats, events, nsenter, docker debug
-          - Debugging images without a shell
-      - slug: container-internals
-        title: Inside the kernel — namespaces, cgroups and overlayfs
-        level: advanced
-        covers:
-          - Each namespace type and what it isolates
-          - cgroup v2 controllers and the files under /sys/fs/cgroup
-          - overlay2 on disk and whiteouts
-          - Building a container by hand with unshare and chroot
-      - slug: oci-and-runtimes
-        title: OCI, containerd, runc and the alternatives
-        level: advanced
-        covers:
-          - The OCI image and runtime specifications
-          - containerd, CRI-O, runc, crun, gVisor, Kata
-          - Running a container from an OCI bundle with runc
-      - slug: lab-containerise-an-app
-        title: "Lab: containerise a real application"
-        level: intermediate
-        lab: true
-        covers:
-          - API + database + worker with Compose
-          - Multi-stage, non-root, healthchecks, under 100 MB
-          - Measure image size and build time before and after
-
-  - name: Scripting and automation
-    folder: scripting
-    pages:
-      - slug: bash-essentials
-        title: Bash — the glue of operations
-        level: foundation
-        covers:
-          - Variables, quoting, conditionals, loops, functions
-          - Exit codes, set -euo pipefail, traps
-          - Reading input and arguments
-      - slug: text-processing
-        title: Text processing — grep, sed, awk, jq
-        level: intermediate
-        covers:
-          - Regular expressions that are worth memorising
-          - sed and awk for everyday transformations
-          - jq and yq for JSON and YAML
-      - slug: writing-reliable-scripts
-        title: Writing scripts you can trust
-        level: intermediate
-        covers:
-          - Idempotency, dry-run flags, logging
-          - ShellCheck
-          - When to stop writing Bash and switch to Python
-      - slug: python-for-operations
-        title: Python for operations
-        level: intermediate
-        covers:
-          - Running commands, handling files, calling HTTP APIs
-          - Argument parsing, virtual environments, packaging a small CLI
-          - Talking to cloud and Kubernetes APIs
-      - slug: git-for-devops
-        title: Git — the parts you will use every day
-        level: foundation
-        covers:
-          - Commits, branches, merges, rebases, conflicts
-          - Pull requests and code review etiquette
-          - Tags, releases and semantic versioning
-      - slug: lab-automation-toolkit
-        title: "Lab: build a small automation toolkit"
-        level: intermediate
-        lab: true
-        covers:
-          - A log summariser, a certificate-expiry checker and a disk-usage reporter
-          - Tests and a README for each
-
-  - name: Kubernetes
-    folder: kubernetes
-    pages:
-      - slug: why-kubernetes
-        title: Why Kubernetes exists
-        level: foundation
-        covers:
-          - The problems of running containers on many machines by hand
-          - What an orchestrator does — scheduling, healing, scaling, networking
-          - When Kubernetes is the wrong tool
-      - slug: architecture
-        title: Architecture — control plane and nodes
-        level: foundation
-        covers:
-          - API server, etcd, scheduler, controller manager, kubelet, kube-proxy
-          - The reconciliation loop and desired vs actual state
-          - What happens when you apply a Deployment
-      - slug: local-cluster
-        title: Running a cluster on your laptop
-        level: foundation
-        covers:
-          - kind, k3s, minikube — choosing one
-          - kubectl setup, contexts and namespaces
-          - Your first Pod
-      - slug: pods
-        title: Pods — the smallest thing you can run
-        level: foundation
-        covers:
-          - Why a Pod and not a container
-          - Multi-container Pods, init containers, sidecars
-          - Pod lifecycle and phases
-      - slug: deployments-and-replicasets
-        title: Deployments — running and updating copies of an app
-        level: foundation
-        covers:
-          - ReplicaSets, rolling updates, rollbacks, history
-          - Strategy settings — maxSurge, maxUnavailable
-          - DaemonSets and StatefulSets compared
-      - slug: services-and-dns
-        title: Services — giving Pods a stable address
-        level: foundation
-        covers:
-          - ClusterIP, NodePort, LoadBalancer, ExternalName
-          - Endpoints, EndpointSlices, cluster DNS
-          - How kube-proxy routes traffic
-      - slug: ingress-and-gateway
-        title: Ingress and Gateway API — traffic from outside
-        level: intermediate
-        covers:
-          - Ingress controllers and resources
-          - Gateway API and why it is replacing Ingress
-          - TLS termination and cert-manager
-      - slug: configmaps-and-secrets
-        title: ConfigMaps and Secrets
-        level: foundation
-        covers:
-          - Injecting configuration as env vars and files
-          - Why Secrets aren't secret by default and how to fix that
-          - External Secrets Operator, sealed secrets
-      - slug: storage
-        title: Storage — volumes that outlive Pods
-        level: intermediate
-        covers:
-          - PersistentVolumes, PersistentVolumeClaims, StorageClasses
-          - Access modes, dynamic provisioning, CSI drivers
-          - StatefulSets and volumeClaimTemplates
-          - Backups with Velero
-      - slug: probes-and-health
-        title: Health checks — liveness, readiness and startup probes
-        level: intermediate
-        covers:
-          - What each probe is for and what happens when it fails
-          - Common misconfigurations that cause outages
-          - Graceful shutdown and terminationGracePeriodSeconds
-      - slug: resources-and-scheduling
-        title: Requests, limits and how the scheduler decides
-        level: intermediate
-        covers:
-          - CPU vs memory limits and what happens when you exceed each
-          - QoS classes, evictions
-          - Node selectors, affinity, taints and tolerations, topology spread
-      - slug: autoscaling
-        title: Autoscaling — Pods and nodes
-        level: intermediate
-        covers:
-          - HorizontalPodAutoscaler on CPU and custom metrics
-          - VerticalPodAutoscaler, KEDA
-          - Cluster Autoscaler and Karpenter
-      - slug: namespaces-rbac
-        title: Namespaces, RBAC and service accounts
-        level: intermediate
-        covers:
-          - Roles, ClusterRoles, bindings
-          - Service accounts and workload identity
-          - Resource quotas and limit ranges for multi-tenancy
-      - slug: network-policies
-        title: Network policies — who can talk to whom
-        level: intermediate
-        covers:
-          - CNI plugins and what they provide
-          - Default-deny and allow rules
-          - Testing a policy
-      - slug: helm
-        title: Helm — packaging applications
-        level: intermediate
-        covers:
-          - Charts, values, templates, releases
-          - Writing a chart for your own app
-          - Chart repositories and dependency management
-      - slug: kustomize
-        title: Kustomize — configuration without templates
-        level: intermediate
-        covers:
-          - Bases and overlays
-          - Patches and generators
-          - Helm vs Kustomize
-      - slug: troubleshooting
-        title: Troubleshooting — Pending, CrashLoopBackOff, ImagePullBackOff and friends
-        level: intermediate
-        covers:
-          - A diagnosis method using describe, logs, events, exec and ephemeral containers
-          - Each common failure state and its usual causes
-          - Node-level problems — NotReady, disk pressure, kubelet logs
-      - slug: operations
-        title: Operating a cluster — upgrades, backups and capacity
-        level: advanced
-        covers:
-          - Upgrading control plane and nodes, version skew policy
-          - etcd backup and restore
-          - Draining nodes, PodDisruptionBudgets, capacity planning
-      - slug: operators-and-crds
-        title: Extending Kubernetes — CRDs and operators
-        level: advanced
-        covers:
-          - Custom resources and controllers
-          - The reconcile loop in your own code with Kubebuilder
-          - When an operator is the right tool
-      - slug: internals
-        title: Inside the control plane
-        level: advanced
-        covers:
-          - API server request flow — authentication, authorisation, admission
-          - Watches, informers, leader election
-          - etcd and Raft, scheduler framework
-          - Networking data path with iptables, IPVS and eBPF
-      - slug: lab-deploy-the-app
-        title: "Lab: deploy the project to Kubernetes"
-        level: intermediate
-        lab: true
-        covers:
-          - Deployments, Services, Ingress, probes, limits, ConfigMaps and Secrets
-          - A Helm chart, HPA, PDB and NetworkPolicy
-          - Break it on purpose and recover
-
-  - name: CI/CD and GitOps
-    folder: cicd
-    pages:
-      - slug: what-is-ci-cd
-        title: What CI and CD actually mean
-        level: foundation
-        covers:
-          - Continuous integration, delivery and deployment, and the difference
-          - What a pipeline is and what a good one guarantees
-      - slug: your-first-pipeline
-        title: Your first pipeline
-        level: foundation
-        covers:
-          - GitHub Actions basics — workflows, jobs, steps, runners
-          - Lint, test, build on every push
-          - Reading logs and fixing a failing run
-      - slug: building-images-in-ci
-        title: Building and publishing images in CI
-        level: intermediate
-        covers:
-          - BuildKit in CI, layer caching, multi-platform builds
-          - Tagging strategy — semantic version plus commit SHA
-          - Pushing to a registry with short-lived credentials
-      - slug: testing-and-quality-gates
-        title: Tests, scans and quality gates
-        level: intermediate
-        covers:
-          - Unit, integration and end-to-end tests in a pipeline
-          - Image scanning, dependency scanning, linting as gates
-          - Keeping pipelines fast — parallelism and caching
-      - slug: artifact-promotion
-        title: Promoting one artifact from dev to production
-        level: intermediate
-        covers:
-          - Build once, deploy many
-          - Immutable digests and environment configuration
-          - Approvals and manual gates
-      - slug: deployment-strategies
-        title: Rolling, blue/green and canary deployments
-        level: intermediate
-        covers:
-          - What each strategy trades off
-          - Argo Rollouts and Flagger
-          - Automated rollback on bad metrics
-      - slug: gitops
-        title: GitOps — Git as the source of truth
-        level: intermediate
-        covers:
-          - Pull-based deployment with Argo CD or Flux
-          - Repository layouts, environment promotion with pull requests
-          - Drift detection and secrets in GitOps
-      - slug: runners-and-security
-        title: Runners, secrets and pipeline security
-        level: intermediate
-        covers:
-          - Hosted vs self-hosted runners, ephemeral runners
-          - Secrets in CI, OIDC to cloud providers instead of static keys
-          - Supply-chain risks in pipelines
-      - slug: other-ci-systems
-        title: GitLab CI, Jenkins and Tekton
-        level: intermediate
-        covers:
-          - The same ideas in other systems
-          - Migrating between them
-      - slug: lab-end-to-end-pipeline
-        title: "Lab: a pipeline from commit to cluster"
-        level: intermediate
-        lab: true
-        covers:
-          - Build, test, scan, sign, push, deploy to staging via Argo CD, promote to production
-          - Measure pipeline time and cut it
-
-  - name: Infrastructure as code
-    folder: iac
-    pages:
-      - slug: why-infrastructure-as-code
-        title: Why describe infrastructure in files
-        level: foundation
-        covers:
-          - The problems with clicking in a console
-          - Declarative vs imperative, idempotency
-          - The landscape — Terraform/OpenTofu, Pulumi, CloudFormation, Ansible, Crossplane
-      - slug: terraform-basics
-        title: Terraform basics
-        level: foundation
-        covers:
-          - Providers, resources, variables, outputs
-          - init, plan, apply, destroy
-          - Reading a plan before applying it
-      - slug: terraform-state
-        title: State — the file that knows what exists
-        level: intermediate
-        covers:
-          - What state is and why it must be shared and locked
-          - Remote backends
-          - import, moved, drift and refresh
-      - slug: terraform-modules
-        title: Modules — reusable infrastructure
-        level: intermediate
-        covers:
-          - Writing, versioning and publishing modules
-          - Structuring repositories and environments
-          - Blast radius and state splitting
-      - slug: terraform-in-ci
-        title: Terraform in a pipeline
-        level: intermediate
-        covers:
-          - plan on pull request, apply on merge
-          - Policy as code — OPA, Checkov
-          - Testing modules
-      - slug: ansible
-        title: Ansible — configuring machines
-        level: intermediate
-        covers:
-          - Inventories, playbooks, roles, idempotent modules
-          - When Ansible vs Terraform vs cloud-init
-      - slug: lab-provision-a-cluster
-        title: "Lab: provision the project's infrastructure"
-        level: intermediate
-        lab: true
-        covers:
-          - A VPC, a Kubernetes cluster and a registry from Terraform with remote state
-          - plan in CI with a policy check
-
-  - name: Cloud
-    folder: cloud
-    pages:
-      - slug: cloud-fundamentals
-        title: Cloud fundamentals — what you are actually renting
-        level: foundation
-        covers:
-          - Regions, zones, the shared responsibility model
-          - Compute, storage, networking, managed services
-          - AWS, Azure and GCP vocabulary side by side
-      - slug: identity-and-access
-        title: Identity and access — who may do what
-        level: intermediate
-        covers:
-          - Users, roles, policies, least privilege
-          - Workload identity instead of static keys
-          - Auditing who did what
-      - slug: cloud-networking
-        title: Cloud networking — VPCs, subnets and gateways
-        level: intermediate
-        covers:
-          - Public vs private subnets, route tables, NAT, internet gateways
-          - Security groups and network ACLs
-          - Private endpoints, peering, transit
-      - slug: compute
-        title: Compute options — VMs, containers, serverless
-        level: foundation
-        covers:
-          - When to use each
-          - Instance types, spot and reserved capacity
-      - slug: managed-kubernetes
-        title: Managed Kubernetes — EKS, GKE, AKS
-        level: intermediate
-        covers:
-          - What the provider manages and what you still own
-          - Node groups, upgrades, add-ons
-          - Cost and sizing
-      - slug: storage-and-databases
-        title: Object storage, block storage and managed databases
-        level: intermediate
-        covers:
-          - When to use each kind of storage
-          - Backups, snapshots, RPO and RTO
-      - slug: cost-management
-        title: Keeping the bill under control
-        level: intermediate
-        covers:
-          - Tagging and allocation
-          - The usual waste — idle, oversized, egress
-          - Commitments, spot, autoscaling
-      - slug: multi-region-and-dr
-        title: Multi-region and disaster recovery
-        level: advanced
-        covers:
-          - Active/passive and active/active patterns
-          - Data replication trade-offs
-          - Testing a failover
-      - slug: lab-cloud-foundation
-        title: "Lab: a cloud foundation for the project"
-        level: intermediate
-        lab: true
-        covers:
-          - An account with budgets and alerts, a VPC, a managed cluster, workload identity for CI
-
-  - name: Observability
-    folder: observability
-    pages:
-      - slug: what-is-observability
-        title: Metrics, logs and traces — three ways to see a system
-        level: foundation
-        covers:
-          - What each signal is good for
-          - The cost of each
-      - slug: prometheus
-        title: Prometheus — collecting metrics
-        level: intermediate
-        covers:
-          - The data model, exporters, scraping
-          - PromQL from the first query to rates and histograms
-          - Cardinality and why it matters
-      - slug: grafana
-        title: Grafana — dashboards that answer questions
-        level: intermediate
-        covers:
-          - Building a dashboard with RED and USE panels
-          - Variables and annotations
-          - Dashboards as code
-      - slug: logging-stack
-        title: Logs at scale — Loki, Elasticsearch, OpenSearch
-        level: intermediate
-        covers:
-          - Structured logging
-          - Collecting, indexing, retention and cost
-          - Querying effectively
-      - slug: tracing
-        title: Tracing — following one request through many services
-        level: intermediate
-        covers:
-          - OpenTelemetry, spans, context propagation
-          - Sampling
-          - Jaeger and Tempo
-      - slug: slos-and-alerting
-        title: SLOs, error budgets and alerts that don't cry wolf
-        level: intermediate
-        covers:
-          - SLIs, SLOs and error budgets explained with examples
-          - Burn-rate alerts
-          - Runbooks and alert hygiene
-      - slug: on-call-and-incidents
-        title: On-call and incident response
-        level: intermediate
-        covers:
-          - Rotations, severity levels, communication
-          - Running an incident
-          - Blameless postmortems
-      - slug: lab-observe-the-app
-        title: "Lab: instrument and monitor the project"
-        level: intermediate
-        lab: true
-        covers:
-          - Prometheus, Grafana and Loki on the cluster
-          - One SLO and a burn-rate alert, triggered by a bad deploy
-
-  - name: Security
-    folder: security
-    pages:
-      - slug: security-mindset
-        title: Thinking about security — threats, surfaces and least privilege
-        level: foundation
-        covers:
-          - Threat modelling for a small system
-          - Defence in depth
-      - slug: secrets-management
-        title: Secrets — keeping keys out of code
-        level: intermediate
-        covers:
-          - Vault and cloud secret managers
-          - Rotation, short-lived credentials
-          - Finding secrets already committed to Git and what to do
-      - slug: supply-chain-security
-        title: Supply-chain security — knowing what you ship
-        level: intermediate
-        covers:
-          - SBOMs, dependency scanning
-          - Image signing and verification with Sigstore
-          - SLSA levels and provenance
-      - slug: kubernetes-security
-        title: Securing a Kubernetes cluster
-        level: intermediate
-        covers:
-          - Pod Security Standards
-          - Admission control with Kyverno or Gatekeeper
-          - Runtime detection with Falco
-          - CIS benchmarks
-      - slug: network-security
-        title: Network security — zero trust in practice
-        level: advanced
-        covers:
-          - mTLS and service identity
-          - Egress control, WAFs
-      - slug: compliance-basics
-        title: Compliance basics for engineers
-        level: intermediate
-        covers:
-          - What SOC 2, ISO 27001 and PCI ask of infrastructure
-          - Audit logging and evidence automation
-      - slug: lab-harden-the-project
-        title: "Lab: harden the project end to end"
-        level: intermediate
-        lab: true
-        covers:
-          - Scan, sign and verify images at admission
-          - Secrets from a manager, network policies, restricted Pod Security
-
-  - name: Reliability and operations
-    folder: reliability
-    pages:
-      - slug: designing-for-failure
-        title: Designing for failure
-        level: intermediate
-        covers:
-          - Redundancy, retries with backoff, timeouts, circuit breakers, bulkheads
-          - Graceful degradation
-      - slug: capacity-planning
-        title: Capacity planning
-        level: advanced
-        covers:
-          - Load testing with k6
-          - Utilisation vs latency, Little's law
-          - Headroom and growth
-      - slug: performance-engineering
-        title: Finding what is slow
-        level: advanced
-        covers:
-          - Percentiles vs averages, tail latency
-          - Profiling with perf, pprof and flame graphs
-      - slug: chaos-engineering
-        title: Chaos engineering — breaking things on purpose
-        level: advanced
-        covers:
-          - Steady-state hypotheses, game days
-          - Litmus and Chaos Mesh
-      - slug: backups-and-recovery
-        title: Backups that actually restore
-        level: intermediate
-        covers:
-          - What to back up, how often, where
-          - Testing restores
-      - slug: lab-game-day
-        title: "Lab: run a game day"
-        level: advanced
-        lab: true
-        covers:
-          - Kill the database primary, saturate a node, inject latency
-          - Write and act on a postmortem
-
-  - name: Platform engineering
-    folder: platform
-    pages:
-      - slug: what-is-platform-engineering
-        title: Platform engineering — building for other engineers
-        level: advanced
-        covers:
-          - Golden paths and self-service
-          - Platform as a product
-      - slug: multi-tenancy
-        title: Multi-tenancy at scale
-        level: advanced
-        covers:
-          - Namespaces, quotas, virtual clusters
-          - Cost showback
-      - slug: developer-portals
-        title: Developer portals and environments
-        level: advanced
-        covers:
-          - Backstage
-          - Preview environments per pull request
-      - slug: progressive-delivery-platform
-        title: Progressive delivery as a platform feature
-        level: advanced
-        covers:
-          - Canary analysis with metrics
-          - Automated rollback policies
-
-  - name: Capstone project
-    folder: capstone
-    pages:
-      - slug: project-overview
-        title: The project — what you will have built
-        level: intermediate
-        covers:
-          - Architecture of the finished system
-          - How each section's lab contributed
-      - slug: architecture-decisions
-        title: Writing architecture decision records
-        level: intermediate
-        covers:
-          - The ADR format and why it matters
-          - Three ADRs for the project
-      - slug: documenting-and-demoing
-        title: Documenting and demoing your work
-        level: intermediate
-        covers:
-          - A README with a five-minute demo path
-          - Diagrams and runbooks
-      - slug: what-next
-        title: Where to go from here
-        level: foundation
-        covers:
-          - Specialisations — SRE, security, platform, cloud architecture
-          - Communities, certifications, keeping up
+- name: Getting started
+  folder: getting-started
+  pages:
+  - slug: what-is-devops
+    title: What is DevOps, really?
+    level: foundation
+    covers:
+    - The problem DevOps solves — the wall between "writing software" and "running software"
+    - What a DevOps engineer actually does day to day
+    - The toolchain at a glance and how the sections of this course map to it
+    - Related roles — SRE, platform engineer, cloud engineer — and how they differ
+  - slug: learning-path
+    title: The learning path — which subjects to learn, in what order
+    level: foundation
+    covers:
+    - How Linux, Networking, Docker, Kubernetes, Scripting, Terraform and Prometheus fit together
+    - A suggested order with what each unlocks
+    - How much time to budget
+  - slug: setting-up-your-machine
+    title: Setting up your machine
+    level: foundation
+    covers:
+    - Installing a terminal, Git, Docker and a code editor on Linux, macOS and Windows (WSL2)
+    - Creating a free GitHub account and SSH keys
+    - A scratch Linux VM or cloud free tier for experiments
+    - How to check everything works
+  - slug: how-to-learn-this-course
+    title: How to learn this course
+    level: foundation
+    covers:
+    - Reading order and how the sections depend on each other
+    - Keeping a lab notebook and a portfolio repository
+    - When to skip ahead and when not to
+- name: CI/CD and GitOps
+  folder: cicd
+  pages:
+  - slug: what-is-ci-cd
+    title: What CI and CD actually mean
+    level: foundation
+    covers:
+    - Continuous integration, delivery and deployment, and the difference
+    - What a pipeline is and what a good one guarantees
+  - slug: your-first-pipeline
+    title: Your first pipeline
+    level: foundation
+    covers:
+    - GitHub Actions basics — workflows, jobs, steps, runners
+    - Lint, test, build on every push
+    - Reading logs and fixing a failing run
+  - slug: building-images-in-ci
+    title: Building and publishing images in CI
+    level: intermediate
+    covers:
+    - BuildKit in CI, layer caching, multi-platform builds
+    - Tagging strategy — semantic version plus commit SHA
+    - Pushing to a registry with short-lived credentials
+  - slug: testing-and-quality-gates
+    title: Tests, scans and quality gates
+    level: intermediate
+    covers:
+    - Unit, integration and end-to-end tests in a pipeline
+    - Image scanning, dependency scanning, linting as gates
+    - Keeping pipelines fast — parallelism and caching
+  - slug: artifact-promotion
+    title: Promoting one artifact from dev to production
+    level: intermediate
+    covers:
+    - Build once, deploy many
+    - Immutable digests and environment configuration
+    - Approvals and manual gates
+  - slug: deployment-strategies
+    title: Rolling, blue/green and canary deployments
+    level: intermediate
+    covers:
+    - What each strategy trades off
+    - Argo Rollouts and Flagger
+    - Automated rollback on bad metrics
+  - slug: gitops
+    title: GitOps — Git as the source of truth
+    level: intermediate
+    covers:
+    - Pull-based deployment with Argo CD or Flux
+    - Repository layouts, environment promotion with pull requests
+    - Drift detection and secrets in GitOps
+  - slug: runners-and-security
+    title: Runners, secrets and pipeline security
+    level: intermediate
+    covers:
+    - Hosted vs self-hosted runners, ephemeral runners
+    - Secrets in CI, OIDC to cloud providers instead of static keys
+    - Supply-chain risks in pipelines
+  - slug: other-ci-systems
+    title: GitLab CI, Jenkins and Tekton
+    level: intermediate
+    covers:
+    - The same ideas in other systems
+    - Migrating between them
+  - slug: lab-end-to-end-pipeline
+    title: 'Lab: a pipeline from commit to cluster'
+    level: intermediate
+    lab: true
+    covers:
+    - Build, test, scan, sign, push, deploy to staging via Argo CD, promote to production
+    - Measure pipeline time and cut it
+- name: Infrastructure as code
+  folder: iac
+  pages:
+  - slug: why-infrastructure-as-code
+    title: Infrastructure as code — the idea and the tools
+    level: foundation
+    covers:
+    - The problems with clicking in a console
+    - Declarative vs imperative, idempotency
+    - The landscape — Terraform/OpenTofu, Pulumi, CloudFormation, Ansible, Crossplane
+    - 'Where to go next: the Terraform subject'
+  - slug: ansible
+    title: Ansible — configuring machines
+    level: intermediate
+    covers:
+    - Inventories, playbooks, roles, idempotent modules
+    - When Ansible vs Terraform vs cloud-init
+- name: Cloud
+  folder: cloud
+  pages:
+  - slug: cloud-fundamentals
+    title: Cloud fundamentals — what you are actually renting
+    level: foundation
+    covers:
+    - Regions, zones, the shared responsibility model
+    - Compute, storage, networking, managed services
+    - AWS, Azure and GCP vocabulary side by side
+  - slug: identity-and-access
+    title: Identity and access — who may do what
+    level: intermediate
+    covers:
+    - Users, roles, policies, least privilege
+    - Workload identity instead of static keys
+    - Auditing who did what
+  - slug: cloud-networking
+    title: Cloud networking — VPCs, subnets and gateways
+    level: intermediate
+    covers:
+    - Public vs private subnets, route tables, NAT, internet gateways
+    - Security groups and network ACLs
+    - Private endpoints, peering, transit
+  - slug: compute
+    title: Compute options — VMs, containers, serverless
+    level: foundation
+    covers:
+    - When to use each
+    - Instance types, spot and reserved capacity
+  - slug: managed-kubernetes
+    title: Managed Kubernetes — EKS, GKE, AKS
+    level: intermediate
+    covers:
+    - What the provider manages and what you still own
+    - Node groups, upgrades, add-ons
+    - Cost and sizing
+  - slug: storage-and-databases
+    title: Object storage, block storage and managed databases
+    level: intermediate
+    covers:
+    - When to use each kind of storage
+    - Backups, snapshots, RPO and RTO
+  - slug: cost-management
+    title: Keeping the bill under control
+    level: intermediate
+    covers:
+    - Tagging and allocation
+    - The usual waste — idle, oversized, egress
+    - Commitments, spot, autoscaling
+  - slug: multi-region-and-dr
+    title: Multi-region and disaster recovery
+    level: advanced
+    covers:
+    - Active/passive and active/active patterns
+    - Data replication trade-offs
+    - Testing a failover
+  - slug: lab-cloud-foundation
+    title: 'Lab: a cloud foundation for the project'
+    level: intermediate
+    lab: true
+    covers:
+    - An account with budgets and alerts, a VPC, a managed cluster, workload identity for CI
+- name: Observability
+  folder: observability
+  pages:
+  - slug: what-is-observability
+    title: Metrics, logs and traces — three ways to see a system
+    level: foundation
+    covers:
+    - What each signal is good for
+    - The cost of each
+  - slug: grafana
+    title: Grafana — dashboards that answer questions
+    level: intermediate
+    covers:
+    - Building a dashboard with RED and USE panels
+    - Variables and annotations
+    - Dashboards as code
+  - slug: logging-stack
+    title: Logs at scale — Loki, Elasticsearch, OpenSearch
+    level: intermediate
+    covers:
+    - Structured logging
+    - Collecting, indexing, retention and cost
+    - Querying effectively
+  - slug: tracing
+    title: Tracing — following one request through many services
+    level: intermediate
+    covers:
+    - OpenTelemetry, spans, context propagation
+    - Sampling
+    - Jaeger and Tempo
+  - slug: slos-and-alerting
+    title: SLOs, error budgets and alerts that don't cry wolf
+    level: intermediate
+    covers:
+    - SLIs, SLOs and error budgets explained with examples
+    - Burn-rate alerts
+    - Runbooks and alert hygiene
+  - slug: on-call-and-incidents
+    title: On-call and incident response
+    level: intermediate
+    covers:
+    - Rotations, severity levels, communication
+    - Running an incident
+    - Blameless postmortems
+  - slug: lab-observe-the-app
+    title: 'Lab: instrument and monitor the project'
+    level: intermediate
+    lab: true
+    covers:
+    - Prometheus, Grafana and Loki on the cluster
+    - One SLO and a burn-rate alert, triggered by a bad deploy
+- name: Security
+  folder: security
+  pages:
+  - slug: security-mindset
+    title: Thinking about security — threats, surfaces and least privilege
+    level: foundation
+    covers:
+    - Threat modelling for a small system
+    - Defence in depth
+  - slug: secrets-management
+    title: Secrets — keeping keys out of code
+    level: intermediate
+    covers:
+    - Vault and cloud secret managers
+    - Rotation, short-lived credentials
+    - Finding secrets already committed to Git and what to do
+  - slug: supply-chain-security
+    title: Supply-chain security — knowing what you ship
+    level: intermediate
+    covers:
+    - SBOMs, dependency scanning
+    - Image signing and verification with Sigstore
+    - SLSA levels and provenance
+  - slug: kubernetes-security
+    title: Securing a Kubernetes cluster
+    level: intermediate
+    covers:
+    - Pod Security Standards
+    - Admission control with Kyverno or Gatekeeper
+    - Runtime detection with Falco
+    - CIS benchmarks
+  - slug: network-security
+    title: Network security — zero trust in practice
+    level: advanced
+    covers:
+    - mTLS and service identity
+    - Egress control, WAFs
+  - slug: compliance-basics
+    title: Compliance basics for engineers
+    level: intermediate
+    covers:
+    - What SOC 2, ISO 27001 and PCI ask of infrastructure
+    - Audit logging and evidence automation
+  - slug: lab-harden-the-project
+    title: 'Lab: harden the project end to end'
+    level: intermediate
+    lab: true
+    covers:
+    - Scan, sign and verify images at admission
+    - Secrets from a manager, network policies, restricted Pod Security
+- name: Reliability and operations
+  folder: reliability
+  pages:
+  - slug: designing-for-failure
+    title: Designing for failure
+    level: intermediate
+    covers:
+    - Redundancy, retries with backoff, timeouts, circuit breakers, bulkheads
+    - Graceful degradation
+  - slug: capacity-planning
+    title: Capacity planning
+    level: advanced
+    covers:
+    - Load testing with k6
+    - Utilisation vs latency, Little's law
+    - Headroom and growth
+  - slug: performance-engineering
+    title: Finding what is slow
+    level: advanced
+    covers:
+    - Percentiles vs averages, tail latency
+    - Profiling with perf, pprof and flame graphs
+  - slug: chaos-engineering
+    title: Chaos engineering — breaking things on purpose
+    level: advanced
+    covers:
+    - Steady-state hypotheses, game days
+    - Litmus and Chaos Mesh
+  - slug: backups-and-recovery
+    title: Backups that actually restore
+    level: intermediate
+    covers:
+    - What to back up, how often, where
+    - Testing restores
+  - slug: lab-game-day
+    title: 'Lab: run a game day'
+    level: advanced
+    lab: true
+    covers:
+    - Kill the database primary, saturate a node, inject latency
+    - Write and act on a postmortem
+- name: Platform engineering
+  folder: platform
+  pages:
+  - slug: what-is-platform-engineering
+    title: Platform engineering — building for other engineers
+    level: advanced
+    covers:
+    - Golden paths and self-service
+    - Platform as a product
+  - slug: multi-tenancy
+    title: Multi-tenancy at scale
+    level: advanced
+    covers:
+    - Namespaces, quotas, virtual clusters
+    - Cost showback
+  - slug: developer-portals
+    title: Developer portals and environments
+    level: advanced
+    covers:
+    - Backstage
+    - Preview environments per pull request
+  - slug: progressive-delivery-platform
+    title: Progressive delivery as a platform feature
+    level: advanced
+    covers:
+    - Canary analysis with metrics
+    - Automated rollback policies
+- name: Capstone project
+  folder: capstone
+  pages:
+  - slug: project-overview
+    title: The project — what you will have built
+    level: intermediate
+    covers:
+    - Architecture of the finished system
+    - How each section's lab contributed
+  - slug: architecture-decisions
+    title: Writing architecture decision records
+    level: intermediate
+    covers:
+    - The ADR format and why it matters
+    - Three ADRs for the project
+  - slug: documenting-and-demoing
+    title: Documenting and demoing your work
+    level: intermediate
+    covers:
+    - A README with a five-minute demo path
+    - Diagrams and runbooks
+  - slug: what-next
+    title: Where to go from here
+    level: foundation
+    covers:
+    - Specialisations — SRE, security, platform, cloud architecture
+    - Communities, certifications, keeping up

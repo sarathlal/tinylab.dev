@@ -2,7 +2,7 @@
 title: Your first pipeline
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 2
 level: foundation
 draft: true

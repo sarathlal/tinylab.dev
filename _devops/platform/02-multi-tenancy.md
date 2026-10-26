@@ -2,7 +2,7 @@
 title: Multi-tenancy at scale
 description: ''
 section: Platform engineering
-section_order: 13
+section_order: 8
 order: 2
 level: advanced
 draft: true

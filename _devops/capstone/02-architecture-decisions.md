@@ -2,7 +2,7 @@
 title: Writing architecture decision records
 description: ''
 section: Capstone project
-section_order: 14
+section_order: 9
 order: 2
 level: intermediate
 draft: true

@@ -112,7 +112,8 @@ Remove `draft: true`, `sitemap: false` and `covers:` when the page is written.
 
 ## Workflow for writing a page
 
-1. `python3 scripts/scaffold.py devops --check` — confirm the structure is in sync.
+1. Find the page's stub under `_<subject>/<section>/NN-slug.md`. Every planned page already
+   exists as a stub; nothing needs generating.
 2. Open the stub. Its `covers:` list is the brief. Read the previous and next pages in
    the section so the new page starts where the last one ended and does not repeat it.
 3. Research: open the official documentation for everything the page touches. Note the
@@ -136,6 +137,17 @@ Write one page per commit. Do not write several pages at once — depth suffers.
 
 ## Adding or changing the structure
 
-The curriculum lives in `_data/curriculum/<track>.yml`. Edit it, then run
-`python3 scripts/scaffold.py <track>`. The script creates missing stubs and updates
-navigation fields on existing pages; it never overwrites a page's body.
+Pages are plain Markdown files; the site orders them by `section`, `section_order` and
+`order` in front matter. To add a page, copy `_templates/tutorial-page.md` into the right
+`_<subject>/<section>/` folder and set those three fields. To add a section, use a new
+`section` name with the next `section_order`. Keep `_data/curriculum/<subject>.yml` in
+step with what is on disk — it is the human-readable outline of each subject and the
+brief for unwritten pages. (`scripts/scaffold.py` can generate stubs from it, but using
+it is optional; editing files by hand is the normal way.)
+
+## Subjects
+
+Each subject is its own collection and URL: `_linux/` → `/learn/linux/`, and likewise
+`networking`, `scripting`, `docker`, `kubernetes`, `terraform`, `prometheus`. `_devops/` is
+the practice-level course that links to the others. When a DevOps page touches a tool
+in depth, link to that subject's page rather than re-explaining it.

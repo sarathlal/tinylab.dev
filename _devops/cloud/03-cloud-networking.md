@@ -2,7 +2,7 @@
 title: Cloud networking — VPCs, subnets and gateways
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 3
 level: intermediate
 draft: true

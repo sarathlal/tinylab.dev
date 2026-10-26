@@ -2,7 +2,7 @@
 title: Metrics, logs and traces — three ways to see a system
 description: ''
 section: Observability
-section_order: 10
+section_order: 5
 order: 1
 level: foundation
 draft: true

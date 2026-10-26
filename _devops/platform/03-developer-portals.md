@@ -2,7 +2,7 @@
 title: Developer portals and environments
 description: ''
 section: Platform engineering
-section_order: 13
+section_order: 8
 order: 3
 level: advanced
 draft: true

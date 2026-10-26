@@ -2,7 +2,7 @@
 title: Documenting and demoing your work
 description: ''
 section: Capstone project
-section_order: 14
+section_order: 9
 order: 3
 level: intermediate
 draft: true

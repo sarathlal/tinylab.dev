@@ -9,9 +9,9 @@ sitemap:
 
 # Learn tech the plain-language way
 
-TinyLab explains technical topics the way you'd explain them to a friend: an everyday example first, the real mechanism second, then something you can try yourself. Each track is organised as a tutorial series you can read in order, and every page ends with a few questions to check what you learned.
+TinyLab explains technical topics the way you'd explain them to a friend: an everyday example first, the real mechanism second, then something you can try yourself. Each subject is organised as a tutorial series you can read in order, and every page ends with a few questions to check what you learned.
 
-## Learning tracks
+## Subjects
 
 {% include track-grid.html %}
 

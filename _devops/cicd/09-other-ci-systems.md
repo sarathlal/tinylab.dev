@@ -2,7 +2,7 @@
 title: GitLab CI, Jenkins and Tekton
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 9
 level: intermediate
 draft: true

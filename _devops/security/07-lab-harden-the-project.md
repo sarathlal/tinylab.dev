@@ -2,7 +2,7 @@
 title: 'Lab: harden the project end to end'
 description: ''
 section: Security
-section_order: 11
+section_order: 6
 order: 7
 level: intermediate
 draft: true

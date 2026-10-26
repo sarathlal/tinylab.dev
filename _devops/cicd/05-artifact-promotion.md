@@ -2,7 +2,7 @@
 title: Promoting one artifact from dev to production
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 5
 level: intermediate
 draft: true

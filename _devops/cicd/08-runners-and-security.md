@@ -2,7 +2,7 @@
 title: Runners, secrets and pipeline security
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 8
 level: intermediate
 draft: true

@@ -2,7 +2,7 @@
 title: 'Lab: run a game day'
 description: ''
 section: Reliability and operations
-section_order: 12
+section_order: 7
 order: 6
 level: advanced
 draft: true

@@ -140,3 +140,5 @@ blockquote.callout > p:first-child > strong:first-child { display: block; margin
 .draft-title, .draft-link { color: var(--pico-muted-color); }
 .tutorial-sidebar .draft-link { display: block; padding: 0.25rem 0.5rem; }
 .track-progress { font-size: 0.9rem; }
+
+.track-group { margin: 1.5rem 0 0.75rem; font-size: 1.05rem; color: var(--pico-muted-color); text-transform: uppercase; letter-spacing: 0.05em; }

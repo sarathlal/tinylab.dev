@@ -2,7 +2,7 @@
 title: Tests, scans and quality gates
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 4
 level: intermediate
 draft: true

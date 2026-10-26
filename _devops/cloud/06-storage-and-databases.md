@@ -2,7 +2,7 @@
 title: Object storage, block storage and managed databases
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 6
 level: intermediate
 draft: true

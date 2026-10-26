@@ -2,7 +2,7 @@
 title: Cloud fundamentals — what you are actually renting
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 1
 level: foundation
 draft: true

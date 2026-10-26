@@ -2,7 +2,7 @@
 title: Managed Kubernetes — EKS, GKE, AKS
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 5
 level: intermediate
 draft: true

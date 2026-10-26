@@ -41,21 +41,39 @@ permalink: :title/
 # -----------------------------------------------------------------------------
 # Collections
 #
-# Every learning track is a collection. Files are ordered by the `order`
-# front-matter field (and grouped by `section`), never by date.
-# To add a new track: create `_<track>/`, add it here, and add it to
-# `_data/tracks.yml`. Nothing else needs to change.
+# Every subject is a collection. Files are ordered by section_order/order
+# front matter (from _data/curriculum/<subject>.yml), never by date.
+# To add a subject: curriculum file + folder + entry here + _data/tracks.yml,
+# then `python3 scripts/scaffold.py <subject>`.
 # -----------------------------------------------------------------------------
 collections:
   ai_news:
     output: true
     permalink: /news/ai/:slug/
+  linux:
+    output: true
+    permalink: /learn/linux/:path/
+  networking:
+    output: true
+    permalink: /learn/networking/:path/
+  docker:
+    output: true
+    permalink: /learn/docker/:path/
+  kubernetes:
+    output: true
+    permalink: /learn/kubernetes/:path/
+  scripting:
+    output: true
+    permalink: /learn/scripting/:path/
+  terraform:
+    output: true
+    permalink: /learn/terraform/:path/
+  prometheus:
+    output: true
+    permalink: /learn/prometheus/:path/
   devops:
     output: true
     permalink: /learn/devops/:path/
-  # python:
-  #   output: true
-  #   permalink: /learn/python/:path/
 
 defaults:
   - scope:
@@ -63,6 +81,48 @@ defaults:
       type: ai_news
     values:
       layout: post
+  - scope:
+      path: ""
+      type: linux
+    values:
+      layout: tutorial
+      track: linux
+  - scope:
+      path: ""
+      type: networking
+    values:
+      layout: tutorial
+      track: networking
+  - scope:
+      path: ""
+      type: docker
+    values:
+      layout: tutorial
+      track: docker
+  - scope:
+      path: ""
+      type: kubernetes
+    values:
+      layout: tutorial
+      track: kubernetes
+  - scope:
+      path: ""
+      type: scripting
+    values:
+      layout: tutorial
+      track: scripting
+  - scope:
+      path: ""
+      type: terraform
+    values:
+      layout: tutorial
+      track: terraform
+  - scope:
+      path: ""
+      type: prometheus
+    values:
+      layout: tutorial
+      track: prometheus
   - scope:
       path: ""
       type: devops

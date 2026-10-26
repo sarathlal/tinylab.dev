@@ -2,7 +2,7 @@
 title: Designing for failure
 description: ''
 section: Reliability and operations
-section_order: 12
+section_order: 7
 order: 1
 level: intermediate
 draft: true

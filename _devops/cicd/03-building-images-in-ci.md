@@ -2,7 +2,7 @@
 title: Building and publishing images in CI
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 3
 level: intermediate
 draft: true

@@ -2,7 +2,7 @@
 title: Secrets — keeping keys out of code
 description: ''
 section: Security
-section_order: 11
+section_order: 6
 order: 2
 level: intermediate
 draft: true

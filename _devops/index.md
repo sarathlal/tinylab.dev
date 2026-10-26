@@ -23,8 +23,22 @@ This course teaches that work from the ground up. You do not need a computer sci
 ### What you need
 
 - A computer running Linux, macOS or Windows with [Docker Desktop](https://docs.docker.com/get-docker/) (or Docker Engine on Linux) installed.
-- A terminal and basic comfort with `cd`, `ls` and editing a text file. If that is new, start with the Linux section first.
+- A terminal and basic comfort with `cd`, `ls` and editing a text file. If that is new, start with [Linux]({{ site.baseurl }}/learn/linux/) first.
 - About 30–60 minutes per page, including the hands-on part.
+
+### The subjects this course uses
+
+DevOps is a way of working that uses several tools, and each tool is its own subject on this site. This course explains the practice and links to the subjects when you need them. The [learning path]({{ site.baseurl }}/learn/devops/getting-started/learning-path/) page gives a suggested order.
+
+| Subject | What it gives you |
+| --- | --- |
+| [Linux]({{ site.baseurl }}/learn/linux/) | The machines everything runs on |
+| [Networking]({{ site.baseurl }}/learn/networking/) | How requests travel and why they fail |
+| [Scripting]({{ site.baseurl }}/learn/scripting/) | Bash, Python and Git for automating the rest |
+| [Docker]({{ site.baseurl }}/learn/docker/) | Packaging software into containers |
+| [Kubernetes]({{ site.baseurl }}/learn/kubernetes/) | Running containers across many machines |
+| [Terraform]({{ site.baseurl }}/learn/terraform/) | Infrastructure described in files |
+| [Prometheus]({{ site.baseurl }}/learn/prometheus/) | Metrics, dashboards and alerts |
 
 ## Contents
 
@@ -34,15 +48,13 @@ This course teaches that work from the ground up. You do not need a computer sci
 
 | Area | What you will be able to do |
 | --- | --- |
-| Linux | Read what a machine is doing — processes, memory, disk, services — and fix common problems from the terminal |
-| Networking | Explain how a request travels from a browser to a server and back, and debug it when it doesn't |
-| Docker | Package any program into an image that runs the same on any machine, and keep it small and safe |
-| Kubernetes | Run many containers across many machines, scale them, update them without downtime, and recover from failures |
-| CI/CD | Automate testing, building and releasing so a code change reaches users safely in minutes |
-| Infrastructure as code | Describe servers, networks and clusters in files you can review, version and recreate |
+| CI/CD and GitOps | Automate testing, building and releasing so a code change reaches users safely in minutes |
+| Infrastructure as code | Choose and combine the tools that describe infrastructure in files, and manage machines with Ansible |
 | Cloud | Use a cloud provider's building blocks — identity, networking, compute, storage — without surprises on the bill |
-| Observability | Measure whether a system is healthy, set sensible alerts, and find the cause when it isn't |
+| Observability | Measure whether a system is healthy with metrics, logs and traces, set sensible alerts, and run on-call well |
 | Security | Keep secrets out of code and images, give every component only the access it needs, and know what you are shipping |
+| Reliability | Design for failure, plan capacity, find what is slow, and practise recovery before you need it |
+| Platform engineering | Build the paved road other engineers use |
 
 ## A project to build along the way
 

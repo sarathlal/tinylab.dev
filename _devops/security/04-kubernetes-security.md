@@ -2,7 +2,7 @@
 title: Securing a Kubernetes cluster
 description: ''
 section: Security
-section_order: 11
+section_order: 6
 order: 4
 level: intermediate
 draft: true

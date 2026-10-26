@@ -2,7 +2,7 @@
 title: Supply-chain security — knowing what you ship
 description: ''
 section: Security
-section_order: 11
+section_order: 6
 order: 3
 level: intermediate
 draft: true

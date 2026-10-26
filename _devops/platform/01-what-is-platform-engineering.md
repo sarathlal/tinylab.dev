@@ -2,7 +2,7 @@
 title: Platform engineering — building for other engineers
 description: ''
 section: Platform engineering
-section_order: 13
+section_order: 8
 order: 1
 level: advanced
 draft: true

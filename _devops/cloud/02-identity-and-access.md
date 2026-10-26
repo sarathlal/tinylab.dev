@@ -2,7 +2,7 @@
 title: Identity and access — who may do what
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 2
 level: intermediate
 draft: true

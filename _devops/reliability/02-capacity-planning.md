@@ -2,7 +2,7 @@
 title: Capacity planning
 description: ''
 section: Reliability and operations
-section_order: 12
+section_order: 7
 order: 2
 level: advanced
 draft: true

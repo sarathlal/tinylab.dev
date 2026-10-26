@@ -2,7 +2,7 @@
 title: Thinking about security — threats, surfaces and least privilege
 description: ''
 section: Security
-section_order: 11
+section_order: 6
 order: 1
 level: foundation
 draft: true

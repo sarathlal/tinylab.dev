@@ -1,41 +1,91 @@
-# Learning tracks shown on /learn/ and used by the tutorial layout.
+# Subjects shown on /learn/ and used by the tutorial layout.
 #
-# `key` must match the collection name in _config.yml (the `_<key>/` folder).
-# `status` is one of: active, planned. Planned tracks show on /learn/ without a link.
+# `key` must match the collection name in _config.yml (the `_<key>/` folder)
+# and the curriculum file _data/curriculum/<key>.yml.
+# `status` is one of: active, planned. Planned subjects show on /learn/ without a link.
+# `group` is the heading the subject is listed under on /learn/.
 # Order here is the display order.
 
 - key: devops
   title: DevOps
-  tagline: Docker, Kubernetes, Linux, networking, CI/CD, IaC, cloud, observability and security — from first container to running a platform, one hands-on page at a time.
+  group: Practices
+  tagline: How software gets from a laptop to real users and stays running — pipelines, infrastructure as code, cloud, monitoring, security and reliability. Uses the subjects below.
   status: active
   icon: "🛠️"
 
 - key: linux
-  title: Linux deep dive
-  tagline: The kernel, processes, memory, storage and performance, explained from first principles.
-  status: planned
+  title: Linux
+  group: Systems
+  tagline: The operating system under almost every server — files, users, processes, services, memory, disks and the kernel.
+  status: active
   icon: "🐧"
+
+- key: networking
+  title: Networking
+  group: Systems
+  tagline: How a request travels from a browser to a server and back — IP, TCP, DNS, HTTP, TLS, firewalls and load balancers.
+  status: active
+  icon: "🌐"
+
+- key: scripting
+  title: Scripting
+  group: Systems
+  tagline: Bash, text processing, Python for operations and Git — the glue that automates everything else.
+  status: active
+  icon: "📜"
+
+- key: docker
+  title: Docker
+  group: Tools
+  tagline: Package any program so it runs the same everywhere — images, containers, volumes, networks, Compose and what happens inside the kernel.
+  status: active
+  icon: "🐳"
+
+- key: kubernetes
+  title: Kubernetes
+  group: Tools
+  tagline: Run containers across many machines — scheduling, networking, storage, scaling, upgrades and the control plane inside.
+  status: active
+  icon: "☸️"
+
+- key: terraform
+  title: Terraform
+  group: Tools
+  tagline: Describe servers, networks and clusters in files you can review, version and recreate — HCL, state, modules, CI and policy.
+  status: active
+  icon: "🏗️"
+
+- key: prometheus
+  title: Prometheus
+  group: Tools
+  tagline: Measure whether a system is healthy — metrics, PromQL, alerting, Grafana and scaling out.
+  status: active
+  icon: "🔥"
 
 - key: python
   title: Python
+  group: Languages
   tagline: From first script to production tooling.
   status: planned
   icon: "🐍"
 
 - key: go
   title: Go
+  group: Languages
   tagline: A practical path through Go for infrastructure and backend work.
   status: planned
   icon: "🐹"
 
 - key: rust
   title: Rust
+  group: Languages
   tagline: Ownership, lifetimes and systems programming without the fear.
   status: planned
   icon: "🦀"
 
 - key: react
   title: React
+  group: Frontend
   tagline: Modern front-end development, one concept at a time.
   status: planned
   icon: "⚛️"

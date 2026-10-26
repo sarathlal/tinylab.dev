@@ -2,7 +2,7 @@
 title: 'Lab: a pipeline from commit to cluster'
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 10
 level: intermediate
 draft: true

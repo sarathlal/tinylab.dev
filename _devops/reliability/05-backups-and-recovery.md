@@ -2,7 +2,7 @@
 title: Backups that actually restore
 description: ''
 section: Reliability and operations
-section_order: 12
+section_order: 7
 order: 5
 level: intermediate
 draft: true

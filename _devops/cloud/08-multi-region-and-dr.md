@@ -2,7 +2,7 @@
 title: Multi-region and disaster recovery
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 8
 level: advanced
 draft: true

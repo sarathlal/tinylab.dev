@@ -2,7 +2,7 @@
 title: Rolling, blue/green and canary deployments
 description: ''
 section: CI/CD and GitOps
-section_order: 7
+section_order: 2
 order: 6
 level: intermediate
 draft: true

@@ -2,7 +2,7 @@
 title: Chaos engineering — breaking things on purpose
 description: ''
 section: Reliability and operations
-section_order: 12
+section_order: 7
 order: 4
 level: advanced
 draft: true

@@ -2,7 +2,7 @@
 title: Finding what is slow
 description: ''
 section: Reliability and operations
-section_order: 12
+section_order: 7
 order: 3
 level: advanced
 draft: true

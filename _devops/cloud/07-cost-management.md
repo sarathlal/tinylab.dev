@@ -2,7 +2,7 @@
 title: Keeping the bill under control
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 7
 level: intermediate
 draft: true

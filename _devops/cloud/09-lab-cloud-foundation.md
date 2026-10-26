@@ -2,7 +2,7 @@
 title: 'Lab: a cloud foundation for the project'
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 9
 level: intermediate
 draft: true

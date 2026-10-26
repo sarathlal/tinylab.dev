@@ -2,7 +2,7 @@
 title: Compute options — VMs, containers, serverless
 description: ''
 section: Cloud
-section_order: 9
+section_order: 4
 order: 4
 level: foundation
 draft: true
